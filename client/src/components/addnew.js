@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import { Container, Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import * as FontAwesome from 'react-fontawesome';
 
 class AddNew extends Component {
@@ -51,30 +51,27 @@ class AddNew extends Component {
 
     render() {
         return (
-            <div>
-                <Button color="link" onClick={this.toggle} style={{ marginBottom: '1rem' }}><FontAwesome name="plus" />&nbsp;Add New Entry</Button>
-                <Collapse isOpen={this.state.collapse}>
-                    <Form>
-                        <FormGroup>
-                            <Input type="select" name="category" value={this.state.category} onChange={this.handleInputChange}>
-                                <option value="" disabled={true} hidden={true}>Select Category</option>
-                                <option value={'Film'}>Movies</option>
-                                <option value={'Television'}>TV</option>
-                                <option value={'Book'}>Books</option>
-                                <option value={'Music'}>Music</option>
-                                <option value={'Other'}>Other</option>
-                            </Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Input type="text" name="name" placeholder="Title" value={this.state.name} onChange={this.handleInputChange}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Input type="textarea" name="content" placeholder="Blurb" value={this.state.content} onChange={this.handleInputChange}/>
-                        </FormGroup>
-                        <Button onClick={this.handleSubmit}>Submit</Button>
-                    </Form>
-                </Collapse>
-            </div>
+            <Container className="content">
+                <Form>
+                    <FormGroup>
+                        <Input type="select" name="category" value={this.state.category} onChange={this.handleInputChange}>
+                            <option value="" disabled={true} hidden={true}>Select Category</option>
+                            <option value={'Film'}>Movies</option>
+                            <option value={'Television'}>TV</option>
+                            <option value={'Book'}>Books</option>
+                            <option value={'Music'}>Music</option>
+                            <option value={'Other'}>Other</option>
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Input type="text" name="name" placeholder="Title" value={this.state.name} onChange={this.handleInputChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Input type="textarea" name="content" placeholder="Blurb" value={this.state.content} onChange={this.handleInputChange}/>
+                    </FormGroup>
+                    <Button onClick={this.handleSubmit}>Submit</Button>
+                </Form>
+            </Container>
         );
     }
 }

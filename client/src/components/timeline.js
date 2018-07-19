@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, Row} from 'reactstrap';
 import { VerticalTimeline} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import AddNew from './addnew';
 import Events from './events';
 import 'whatwg-fetch';
 
@@ -40,9 +39,6 @@ class Timeline extends Component {
     render() {
         return (
             <Container>
-                <Row>
-                    <AddNew />
-                </Row>
                 <Row>
                     <VerticalTimeline animate={false} >
                         <Events data={this.state.data} />

@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import Timeline from './timeline';
+import Header from './components/header';
+import Main from './components/main';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          
-        </header>
-        <Timeline />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div>
+    <Header />
+    <Main />
+  </div>
+)
 
 export default App;

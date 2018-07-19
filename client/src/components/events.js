@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import * as FontAwesome from 'react-fontawesome';
-var moment = require('moment');
+import moment from 'moment';
 
 class Events extends Component {
     getIcon(category) {
