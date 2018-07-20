@@ -20,12 +20,14 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-UserSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
+// UserSchema.methods.generateHash = function(password) {
+//     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+// };
 
-UserSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
-};
+// UserSchema.methods.validPassword = function(password) {
+//     return bcrypt.compareSync(password, this.password);
+// };
+
+UserSchema.set('toJSON', { virtuals: true});
 
 module.exports = mongoose.model('User', UserSchema);

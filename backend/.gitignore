@@ -1,2 +1,3 @@
-backend/dburi.js
+dburi.js
 node_modules/
+config.json
