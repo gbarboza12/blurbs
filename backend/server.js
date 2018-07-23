@@ -25,6 +25,7 @@ app.use(logger('dev'));
 app.use(jwt());
 
 app.use(require('./routes/api/messages'));
+app.use(require('./routes/api/signin'));
 app.use(require('./routes/api/users'));
 
 app.use(errorHandler);

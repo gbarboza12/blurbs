@@ -3,14 +3,13 @@ const express = require('express');
 const router = express.Router();
 const userService = require('../../services/userservice');
  
-// routes
-router.post('/authenticate', authenticate);
-router.post('/register', register);
-router.get('/', getAll);
-router.get('/:id', getById);
-router.get('/current', getCurrent);
-router.put('/:id', update);
-router.delete('/:id', _delete);
+router.post('/api/authenticate', authenticate);
+router.post('/api/register', register);
+router.get('/api/users', getAll);
+router.get('/api/:id', getById);
+router.get('/api/current', getCurrent);
+router.put('/api/:id', update);
+router.delete('/api/:id', _delete);
  
 module.exports = router;
  

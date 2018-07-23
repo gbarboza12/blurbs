@@ -1,15 +1,19 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
-import Timeline from './timeline';
+
 import AddNew from './addnew';
-import SignUp from './signup';
+import Login from './login';
+import Timeline from './timeline'
+import Register from './register'
+import { PrivateRoute } from './privateroute';
 
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path='/' component={Timeline}/>
-      <Route path='/addNew' component={AddNew}/>
-      <Route path='/signUp' component={SignUp}/>
+      <PrivateRoute exact path="/" component={Timeline} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path='/addNew' component={AddNew} />
     </Switch>
   </main>
 )
