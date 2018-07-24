@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row} from 'reactstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Container, Row} from 'reactstrap';
 import { VerticalTimeline} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import 'whatwg-fetch';
@@ -32,11 +31,15 @@ class Timeline extends Component {
     }
 
     loadBlurbsFromServer = () => {
-        fetch('/api/blurbs/', {method: 'GET', headers: authHeader()} )
-          .then(data => data.json())
+        const { user } = this.props;
+        
+        fetch(`/api/blurbs/${user._id}`, {
+            method: 'GET', 
+            headers: {'Authorization' : authHeader()}
+        }).then(data => data.json())
           .then((res) => {
-            if (!res.success) this.setState({ error: res.error });
-            else this.setState({ data: res.data });
+            if (!res.success) {this.setState({ error: res.error }); console.log(this.state.error)}
+            else {this.setState({ data: res.data }); }
           });
     }
 
@@ -48,8 +51,6 @@ class Timeline extends Component {
                         <Events data={this.state.data} />
                     </VerticalTimeline>
                 </Row>
-                {this.state.error && <p>{this.state.error}</p>}
-                <Link to="/login">Logout</Link>
             </Container>
         )
     }

@@ -49,7 +49,7 @@ class Register extends Component {
     const { user, submitted } = this.state;
     return (
       <Container className="content">
-        <Label>Register</Label>
+        <h2>Register</h2>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Input

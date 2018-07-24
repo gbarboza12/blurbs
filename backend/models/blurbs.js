@@ -6,6 +6,7 @@ const BlurbsSchema = new Schema({
     name: String,
     content: String,
     date: { type: Date, default: Date.now },
+    author: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
   });
 
   export default mongoose.model('Blurb', BlurbsSchema);

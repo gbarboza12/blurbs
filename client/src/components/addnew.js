@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import * as FontAwesome from 'react-fontawesome';
+import { connect } from 'react-redux';
+import { Container, Button, Form, FormGroup, Input} from 'reactstrap';
+
+import { authHeader } from '../helpers/authheader';
+// import * as FontAwesome from 'react-fontawesome';
 
 class AddNew extends Component {
     constructor(props) {
@@ -17,29 +20,35 @@ class AddNew extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
+
     toggle() {
         this.setState({ collapse: !this.state.collapse });
     }
-
     handleSubmit(e) {
         e.preventDefault();
         const date = new Date().toISOString();
         const category = this.state.category;
         const name = this.state.name;
         const content = this.state.content;
-        if (!category || !name || !content || !date) return;
+        const { user } = this.props;
+        
+        if (!category || !name || !content || !date || !user) return;
+
         fetch('/api/blurbs', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ category, name, content, date }),
+            headers: new Headers({ 
+                'Content-Type': 'application/json',
+                'Authorization' : authHeader()
+             }),
+            body: JSON.stringify({ category, name, content, date, user }),
         }).then(res => res.json()).then((res) => {
             if (!res.success) {
                 this.setState({ error: res.error.message || res.error });
+                console.log(this.state.error)
             }
             else this.setState({ category: '', name: '', content: '', error: null });
         });
     }
-
     handleInputChange(e) {
         const target = e.target;
         const value = target.type === 'select' ? target.selected : target.value;
@@ -76,4 +85,12 @@ class AddNew extends Component {
     }
 }
 
-export default AddNew;
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+export default connect(mapStateToProps)(AddNew);

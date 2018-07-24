@@ -13,7 +13,7 @@ const Main = () => (
       <PrivateRoute exact path="/" component={Timeline} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route path='/addNew' component={AddNew} />
+      <PrivateRoute path='/addNew' component={AddNew} />
     </Switch>
   </main>
 )
