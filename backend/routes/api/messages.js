@@ -1,13 +1,9 @@
 import Blurb from '../../models/blurbs';
-import User from '../../models/User';
 import { Router } from 'express';
 
 const router = module.exports = new Router();
 
-router.get('/api', (req, res) => {
-    res.json({ message: 'Hello, World!' });
-});
-
+// gets all blurbs
 router.get('/api/blurbs', (req, res) => {
     Blurb.find((err, blurbs) => {
         if (err) return res.json({ success: false, error: err });
@@ -15,6 +11,7 @@ router.get('/api/blurbs', (req, res) => {
     });
 });
 
+// gets the specified user's blurbs
 router.get('/api/blurbs/:id', (req, res) => {
   Blurb.find({'author.id': req.user._id}, (err, blurbs) => {
       if (err) return res.json({ success: false, error: err });
@@ -22,6 +19,7 @@ router.get('/api/blurbs/:id', (req, res) => {
   });
 });
 
+// post a new blurb
 router.post('/api/blurbs', (req, res) => {
     const { category, name, content, date, user } = req.body;
     if (!category || !name || !content || !date || !user) {
@@ -41,3 +39,48 @@ router.post('/api/blurbs', (req, res) => {
       return res.json({ success: true });
     });
   });
+
+// updates a blurb for a specified user
+router.put('/api/blurbs/:userId/:blurbId', (req, res) => {
+  const { userId, blurbId } = req.params;
+  if (!userId || !blurbId) {
+    return res.json({ success: false, error: 'No blurb id or user id provided' });
+  }
+
+  Blurb.findById(blurbId, (error, blurb) => {
+    if (error) return res.json({ success: false, error });
+
+    const { category, name, content, date, user } = req.body;
+    if (userId !== new String(blurb.author._id).valueOf()) 
+      return res.json({ success: false, error: 'Invalid user' });
+
+    if (!category || !name || !content || !date) {
+      return res.json({
+        success: false,
+        error: 'You must provide a category, name, and date'
+      });
+    }
+
+    blurb.category = category;
+    blurb.name = name;
+    blurb.content = content;
+    blurb.date = date;
+    blurb.author = user
+    blurb.save(error => {
+      if (error) return res.json({ success: false, error });
+      return res.json({ success: true });
+    });
+  });
+});
+
+// deletes a blurb for a specified user
+router.delete('/api/blurbs/:userId/:blurbId', (req, res) => {
+  const { userId, blurbId } = req.params;
+  if (!userId || !blurbId) {
+    return res.json({ success: false, error: 'No blurb id or user id provided' });
+  }
+  Blurb.remove({ _id: blurbId }, (error, blurb) => {
+    if (error) return res.json({ success: false, error });
+    return res.json({ success: true });
+  });
+});

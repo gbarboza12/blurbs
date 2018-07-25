@@ -24,12 +24,10 @@ class Timeline extends Component {
           this.pollInterval = setInterval(this.loadBlurbsFromServer, 5000);
         }
     }
-
     componentWillUnmount() {
         if (this.pollInterval) clearInterval(this.pollInterval);
         this.pollInterval = null;
     }
-
     loadBlurbsFromServer = () => {
         const { user } = this.props;
         
@@ -42,7 +40,6 @@ class Timeline extends Component {
             else {this.setState({ data: res.data }); }
           });
     }
-
     render() {
         return (
             <Container>

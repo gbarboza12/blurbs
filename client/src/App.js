@@ -24,7 +24,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header />
-                <div className="container">
+                <div>
                     <div className="col-sm-8 col-sm-offset-2">
                         {console.log(store.getState())}
                         {alert.message && <div className={`alert ${alert.type}`}>{alert.message}</div>}

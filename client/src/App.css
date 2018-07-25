@@ -1,6 +1,9 @@
 .App {
   text-align: left;
 }
+.row {
+  display: block !important;
+}
 .App-header {
   background-color: #222;
   height: 150px;
@@ -76,4 +79,20 @@
 .vertical-timeline-element:nth-child(2n):not(.vertical-timeline-element--left) .vertical-timeline-element-content .vertical-timeline-element-date {
   right: 140% !important;
   left: auto !important;
+}
+.timeline-links {
+  float: left;
+  top: 10px;
+
+}
+.vertical-timeline-element-content .vertical-timeline-element-date {
+  top: 10px !important;
+}
+.button-div {
+  float: right;
+}
+@media (max-width: 768px) {
+  .btn{
+      margin-bottom: 5px;
+  } 
 }

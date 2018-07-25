@@ -10,7 +10,7 @@ class Header extends Component {
             return (
                 <ul>
                     <li><Link to='/'>Home</Link></li>
-                    <li><Link to='/addNew'>Add</Link></li>
+                    <li><Link to='/addBlurb'>Add</Link></li>
                     <li><Link to='/login'>Logout</Link></li>
                 </ul>
             );
