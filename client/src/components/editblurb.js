@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Button, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Link } from 'react-router-dom'
+import { Alert, Container, Button, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 
 import { authHeader } from '../helpers/authheader';
 
@@ -10,11 +11,14 @@ class EditBlurb extends Component {
 		this.state = {
 			members: props.location.state,
 			error: null,
+			alertText: '',
+			disabled: false,
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
+		this.getAlert = this.getAlert.bind(this);
 	}
 
 	handleSubmit(e) {
@@ -25,7 +29,14 @@ class EditBlurb extends Component {
 		const content = this.state.members.content;
 		const { user } = this.props;
 
-		if (!category || !name || !content || !date || !user) return;
+		if (!category || !name || !content || !date || !user) {
+			this.setState({
+				alertText: 'Warning',
+				error: 'Nothing to update.',
+			});
+			console.log(this.state.alertText)
+			return;
+		}
 
 		fetch(`/api/blurbs/${user._id}/${this.state.members.id}`, {
 			method: 'PUT',
@@ -36,9 +47,28 @@ class EditBlurb extends Component {
 			body: JSON.stringify({ category, name, content, date, user }),
 		}).then(res => res.json()).then((res) => {
 			if (!res.success) {
-				this.setState({ error: res.error.message || res.error });
+				this.setState({
+					error: res.error.message || res.error,
+					alertText: 'Error',
+				});
 				console.log(this.state.error)
 			}
+			else this.setState({
+				alertText: 'Updated',
+				error: null
+			});
+		});
+	}
+	handleDelete() {
+		const { user } = this.props;
+		fetch(`/api/blurbs/${user._id}/${this.state.members.id}`, {
+			method: 'DELETE',
+			headers: new Headers({
+				'Content-Type': 'application/json',
+				'Authorization': authHeader()
+			}),
+		}).then(res => res.json()).then((res) => {
+			if (!res.success) this.setState({ error: res.error, alertText: 'Error' });
 			else this.setState({
 				members: {
 					...this.state.members,
@@ -46,7 +76,9 @@ class EditBlurb extends Component {
 					name: '',
 					content: '',
 				},
-				error: null
+				disabled: true,
+				error: null,
+				alertText: 'Deleted',
 			});
 		});
 	}
@@ -61,26 +93,35 @@ class EditBlurb extends Component {
 			}
 		});
 	}
-	handleDelete() {
-		const { user } = this.props;
-		fetch(`/api/blurbs/${user._id}/${this.state.members.id}`, {
-			method: 'DELETE',
-			headers: new Headers({
-				'Content-Type': 'application/json',
-				'Authorization': authHeader()
-			}),
-		}).then(res => res.json()).then((res) => {
-			if (!res.success) this.setState({ error: res.error });
-			else this.setState({
-				members: {
-					...this.state.members,
-					category: '',
-					name: '',
-					content: '',
-				},
-				error: null
-			});
-		});
+	getAlert() {
+		if (this.state.alertText === 'Updated') {
+			return (
+				<Alert color="success">
+					Blurb was successfully updated! <Link to='/'>Click here</Link> to see your changes, or you can continue editing below.
+      		</Alert>
+			);
+		} else if (this.state.alertText === 'Error') {
+			return (
+				<Alert color="danger">
+					Error: {this.state.error}
+				</Alert>
+			);
+		} else if (this.state.alertText === 'Deleted') {
+			return (
+				<Alert color="success">
+					Blurb was successfully deleted! <Link to='/'>Click here</Link> to see your updated timeline.
+      	</Alert>
+			)
+		} else if (this.state.alertText === 'Warning') {
+			return (
+				<Alert color="warning">
+					{this.state.error}
+				</Alert>
+			);
+		}
+		else {
+			return '';
+		}
 	}
 
 	render() {
@@ -88,6 +129,7 @@ class EditBlurb extends Component {
 			<Container>
 				<Row>
 					<div className="content">
+						{this.getAlert()}
 						<Form>
 							<FormGroup>
 								<Label>Category</Label>
@@ -109,8 +151,8 @@ class EditBlurb extends Component {
 								<Input type="textarea" name="content" placeholder="Blurb" value={this.state.members.content} onChange={this.handleInputChange} />
 							</FormGroup>
 							<div className='button-div button-wrapper'>
-								<Button color="primary" onClick={this.handleSubmit}>Update Post</Button>{'  '}
-								<Button color="danger" onClick={this.handleDelete}>Delete Post</Button>
+								<Button color="primary" disabled={this.state.disabled} onClick={this.handleSubmit}>Update Post</Button>{'  '}
+								<Button color="danger" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</Button>
 							</div>
 						</Form>
 					</div>

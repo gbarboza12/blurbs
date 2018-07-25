@@ -36,7 +36,7 @@ class Timeline extends Component {
             headers: {'Authorization' : authHeader()}
         }).then(data => data.json())
           .then((res) => {
-            if (!res.success) {this.setState({ error: res.error }); console.log(this.state.error)}
+            if (!res.success) {this.setState({ error: res.error, data: [] }); console.log(this.state.error)}
             else {this.setState({ data: res.data }); }
           });
     }
