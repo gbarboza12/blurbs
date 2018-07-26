@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert, Container, Button, Form, FormGroup, Input, Row } from 'reactstrap';
+import Textarea from 'react-expanding-textarea'
 
 import { authHeader } from '../helpers/authheader';
 // import * as FontAwesome from 'react-fontawesome';
@@ -101,7 +102,14 @@ class AddNew extends Component {
 								<Input type="text" name="name" placeholder="Title" value={this.state.name} onChange={this.handleInputChange} />
 							</FormGroup>
 							<FormGroup>
-								<Input type="textarea" name="content" placeholder="Blurb" value={this.state.content} onChange={this.handleInputChange} />
+								<Textarea
+									rows="1"
+									maxLength="3000"
+									className="ta"
+									name="content"
+									placeholder="Blurb"
+									value={this.state.content}
+									onChange={this.handleInputChange} />
 							</FormGroup>
 							<div className="button-div">
 								<Button onClick={this.handleSubmit}>Submit</Button>

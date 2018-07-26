@@ -10,6 +10,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-expanding-textarea": "^0.1.10",
     "react-fontawesome": "^1.6.1",
     "react-markdown": "^3.3.4",
     "react-redux": "^5.0.7",

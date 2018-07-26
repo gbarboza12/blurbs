@@ -8,18 +8,18 @@ class Header extends Component {
         const {loggedIn} = this.props;
         if(loggedIn) {
             return (
-                <ul>
-                    <li><Link to='/'>Home</Link></li>
-                    <li><Link to='/addBlurb'>Add</Link></li>
-                    <li><Link to='/login'>Logout</Link></li>
+                <ul className="navigation__list">
+                    <li><Link className="navigation__link" to='/'>Home</Link></li>
+                    <li  ><Link className="navigation__link" to='/addBlurb'>Add</Link></li>
+                    <li  ><Link className="navigation__link" to='/login'>Logout</Link></li>
                 </ul>
             );
         } else {
             return (
-                <ul>
-                    <li><Link to='/'>Home</Link></li>
-                    <li><Link to='/register'>Register</Link></li>
-                    <li><Link to='/login'>Login</Link></li>
+                <ul className="navigation__list">
+                    <li><Link className="navigation__link" to='/'>Home</Link></li>
+                    <li><Link className="navigation__link" to='/register'>Register</Link></li>
+                    <li><Link className="navigation__link" to='/login'>Login</Link></li>
                 </ul>
             );
         }
@@ -28,8 +28,8 @@ class Header extends Component {
         return (
             <header>
                 <div className="App-header">
-                    <nav>
-                        <div className="navigation">
+                    <nav className="navigation">
+                        <div>
                             {this.getLinks()}
                         </div>
                     </nav>

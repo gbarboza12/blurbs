@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert, Container, Button, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
 
@@ -148,7 +149,14 @@ class EditBlurb extends Component {
 							</FormGroup>
 							<FormGroup>
 								<Label>Blurb</Label>
-								<Input type="textarea" name="content" placeholder="Blurb" value={this.state.members.content} onChange={this.handleInputChange} />
+								<Textarea
+									rows="1"
+									maxLength="3000"
+									className="ta"
+									name="content"
+									placeholder="Blurb"
+									value={this.state.members.content}
+									onChange={this.handleInputChange} />
 							</FormGroup>
 							<div className='button-div button-wrapper'>
 								<Button color="primary" disabled={this.state.disabled} onClick={this.handleSubmit}>Update Post</Button>{'  '}
