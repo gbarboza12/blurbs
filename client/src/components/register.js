@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, Button, Form, FormGroup, Label, Input, Row } from 'reactstrap';
+import { Container, Form, FormGroup, Label, Input, Row } from 'reactstrap';
 
 import { userActions } from '../actions/useractions';
 
@@ -46,11 +46,11 @@ class Register extends Component {
     const { registering } = this.props;
     const { user, submitted } = this.state;
     return (
-      <Container >
-        <Row>
-          <div className="content">
-            <h2>Register</h2>
-            <br />
+      <div>
+				<div class="text-center">
+					<h3>Register</h3>
+					<hr class="hr-light" />
+				</div>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Input
@@ -80,13 +80,11 @@ class Register extends Component {
                   <div className="help-block">Password is required</div>
                 }
               </FormGroup>
-              <Button>Register</Button>
+              <button className="btn1" >Register</button>
               {registering}
               <Link to="/login" className="btn btn-link">Cancel</Link>
             </Form>
-          </div>
-        </Row>
-      </Container>
+        </div>
     );
   }
 }

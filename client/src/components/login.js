@@ -42,47 +42,48 @@ class Login extends React.Component {
 		const { loggingIn } = this.props;
 		const { email, password, submitted } = this.state;
 		return (
-			<Container>
-				<Row>
-					<div className="content">
-						<h2>Login</h2>
-						<br/>
-						<Form onSubmit={this.handleSubmit}>
-							<FormGroup>
-								<Input
-									type="email"
-									placeholder="Email"
-									name="email"
-									id="dynamic-label-input"
-									value={email}
-									onChange={this.handleChange}>
-								</Input>
-								<Label for="dynamic-label-input">Email</Label>
-								{submitted && !email &&
-									<div className="help-block">Email is required</div>
-								}
-							</FormGroup>
-							<FormGroup>
-								<Input
-									type="password"
-									placeholder="Password"
-									name="password"
-									id="dynamic-label-input"
-									value={password}
-									onChange={this.handleChange}>
-								</Input>
-								<Label for="dynamic-label-input">Password</Label>
-								{submitted && !password &&
-									<div className="help-block">Password is required</div>
-								}
-							</FormGroup>
-							<Button color="primary">Login</Button>
-							{loggingIn }
-							<Link to="/register" className="btn btn-link">Register</Link>
-						</Form>
+			<div>
+				<div class="text-center">
+					<h3>Login</h3>
+					<hr class="hr-light" />
+				</div>
+
+				<Form onSubmit={this.handleSubmit}>
+					<FormGroup>
+						<Input
+							type="email"
+							placeholder="Email"
+							name="email"
+							id="dynamic-label-input"
+							value={email}
+							onChange={this.handleChange}>
+						</Input>
+						<Label for="dynamic-label-input">Email</Label>
+						{submitted && !email &&
+							<div className="help-block">Email is required</div>
+						}
+					</FormGroup>
+					<FormGroup>
+						<Input
+							type="password"
+							placeholder="Password"
+							name="password"
+							id="dynamic-label-input"
+							value={password}
+							onChange={this.handleChange}>
+						</Input>
+						<Label for="dynamic-label-input">Password</Label>
+						{submitted && !password &&
+							<div className="help-block">Password is required</div>
+						}
+					</FormGroup>
+					<div class="text-center">
+						<button className="btn1">Login</button>
+						<br />
+						{loggingIn}
 					</div>
-				</Row>
-			</Container>
+				</Form>
+			</div>
 		);
 	}
 }

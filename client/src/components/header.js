@@ -11,7 +11,7 @@ class Header extends Component {
                 <ul className="navigation__list">
                     <li><Link className="navigation__link" to='/'>Home</Link></li>
                     <li  ><Link className="navigation__link" to='/addBlurb'>Add</Link></li>
-                    <li  ><Link className="navigation__link" to='/login'>Logout</Link></li>
+                    <li  ><Link className="navigation__link" to='/landingpage'>Logout</Link></li>
                 </ul>
             );
         } else {
@@ -19,7 +19,7 @@ class Header extends Component {
                 <ul className="navigation__list">
                     <li><Link className="navigation__link" to='/'>Home</Link></li>
                     <li><Link className="navigation__link" to='/register'>Register</Link></li>
-                    <li><Link className="navigation__link" to='/login'>Login</Link></li>
+                    <li><Link className="navigation__link" to='/landingpage'>Login</Link></li>
                 </ul>
             );
         }
@@ -27,7 +27,7 @@ class Header extends Component {
     render() {
         return (
             <header>
-                <div className="App-header">
+                <div className="App-header ">
                     <nav className="navigation">
                         <div>
                             {this.getLinks()}

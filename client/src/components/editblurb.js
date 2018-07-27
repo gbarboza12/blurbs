@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { Alert, Container, Button, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Alert, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
@@ -16,13 +16,13 @@ class EditBlurb extends Component {
 			disabled: false,
 		};
 
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.getAlert = this.getAlert.bind(this);
 	}
 
-	handleSubmit(e) {
+	handleUpdate(e) {
 		e.preventDefault();
 		const date = new Date().toISOString();
 		const category = this.state.members.category;
@@ -60,7 +60,8 @@ class EditBlurb extends Component {
 			});
 		});
 	}
-	handleDelete() {
+	handleDelete(e) {
+		e.preventDefault();
 		const { user } = this.props;
 		fetch(`/api/blurbs/${user._id}/${this.state.members.id}`, {
 			method: 'DELETE',
@@ -158,9 +159,9 @@ class EditBlurb extends Component {
 									value={this.state.members.content}
 									onChange={this.handleInputChange} />
 							</FormGroup>
-							<div className='button-div button-wrapper'>
-								<Button color="primary" disabled={this.state.disabled} onClick={this.handleSubmit}>Update Post</Button>{'  '}
-								<Button color="danger" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</Button>
+							<div className='button-div'>
+								<button className="btn1" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</button>{'  '}
+								<button className="btn2" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</button>
 							</div>
 						</Form>
 					</div>

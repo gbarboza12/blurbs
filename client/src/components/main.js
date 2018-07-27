@@ -7,11 +7,13 @@ import Timeline from './timeline'
 import Register from './register'
 import Edit from './editblurb';
 import { PrivateRoute } from './privateroute';
+import LandingPage from './landingpage';
 
 const Main = () => (
   <main>
     <Switch>
       <PrivateRoute exact path="/" component={Timeline} />
+      <Route path="/landingpage" component={LandingPage} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <PrivateRoute path='/addBlurb' component={AddNew} />

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { Alert, Container, Button, Form, FormGroup, Input, Row } from 'reactstrap';
-import Textarea from 'react-expanding-textarea'
+import { Alert, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
 // import * as FontAwesome from 'react-fontawesome';
@@ -99,7 +99,16 @@ class AddNew extends Component {
 								</Input>
 							</FormGroup>
 							<FormGroup>
-								<Input type="text" name="name" placeholder="Title" value={this.state.name} onChange={this.handleInputChange} />
+								<Input
+									type="text"
+									name="name"
+									id="dynamic-label-input"
+									placeholder="Title"
+									value={this.state.name}
+									onChange={this.handleInputChange} 
+									>
+								</Input>
+								<Label for="dynamic-label-input">Title</Label>
 							</FormGroup>
 							<FormGroup>
 								<Textarea
@@ -107,12 +116,16 @@ class AddNew extends Component {
 									maxLength="3000"
 									className="ta"
 									name="content"
+									id="dynamic-label-input"
 									placeholder="Blurb"
 									value={this.state.content}
-									onChange={this.handleInputChange} />
+									onChange={this.handleInputChange}
+								>	
+								</Textarea>
+								
 							</FormGroup>
 							<div className="button-div">
-								<Button onClick={this.handleSubmit}>Submit</Button>
+								<button className="btn1" onClick={this.handleSubmit}>Submit</button>
 							</div>
 						</Form>
 					</div>
