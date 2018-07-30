@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { store } from './helpers/store';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'mdbreact/dist/css/mdb.css';
 
 import './App.css';
+import './components/css/forms.css'
 import  {alertActions}  from './actions/alertactions';
 import { history } from './helpers/history';
 import Header from './components/header'

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import {Input} from 'mdbreact';
 
 import { userActions } from '../actions/useractions';
 
@@ -43,46 +42,40 @@ class Login extends React.Component {
 		const { email, password, submitted } = this.state;
 		return (
 			<div>
-				<div class="text-center">
+				<div className="text-center">
 					<h3>Login</h3>
-					<hr class="hr-light" />
+					<hr className="hr-light" />
 				</div>
 
-				<Form onSubmit={this.handleSubmit}>
-					<FormGroup>
+				<form onSubmit={this.handleSubmit}>
 						<Input
+							label="Email"
+							group
 							type="email"
-							placeholder="Email"
 							name="email"
-							id="dynamic-label-input"
 							value={email}
 							onChange={this.handleChange}>
 						</Input>
-						<Label for="dynamic-label-input">Email</Label>
 						{submitted && !email &&
 							<div className="help-block">Email is required</div>
 						}
-					</FormGroup>
-					<FormGroup>
 						<Input
+							label="Password"
+							group
 							type="password"
-							placeholder="Password"
 							name="password"
-							id="dynamic-label-input"
 							value={password}
 							onChange={this.handleChange}>
 						</Input>
-						<Label for="dynamic-label-input">Password</Label>
 						{submitted && !password &&
 							<div className="help-block">Password is required</div>
 						}
-					</FormGroup>
-					<div class="text-center">
-						<button className="btn1">Login</button>
-						<br />
+					<div className="text-center">
+						<button class="btn btn-outline-secondary waves-effect">Login</button>
+						<br /><br />
 						{loggingIn}
 					</div>
-				</Form>
+				</form>
 			</div>
 		);
 	}

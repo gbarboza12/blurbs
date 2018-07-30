@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Button, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import {Container, Row } from 'reactstrap';
 
-import { userActions } from '../actions/useractions';
 import Login from './login';
 import Register from './register';
 
@@ -12,39 +9,46 @@ class LandingPage extends React.Component {
 		super(props);
 
 		this.state = {
-         showRegister: false,	
+         register: false,
+         login: true	
       };
 
-      this.handlePageChange = this.handlePageChange.bind(this);
+      this.switch = this.switch.bind(this);
    }
 
-   handlePageChange() {
-      this.setState({
-          showRegister: !this.state.showRegister,
-      });
+   switch(word) {
+      var register, login;
+      if(word === "register") {
+         register = true;
+         login = false;
+      } else {
+         login = true;
+         register = false;
+      }
+      return this.setState({login: login, register: register});
    }
 
-	render() {
-      const {showRegister} = this.state;
-      console.log(showRegister);
-		return (		
-			<Container >
-				<Row>
-					<div className="content">
-						<div className="card">
-							<div className="card-body">
-                     {showRegister ? <Register/>: <Login/>}
-								
-                        <br/>
-								<div className="text-center">
-									<a href="" style={{textAlign:'center'}} onClick={this.handlePageChange}>Click here</a> to register
+   render() {
+      return (
+         <Container >
+            <Row>
+               <div className="content">
+                  <div className="card">
+                     <div className="card-body">
+                        {this.state.login ? <Login /> : null}
+                        {this.state.register ? <Register /> : null}
+                        <div className="text-center">
+                        {this.state.login ? 
+                           <a href="#" onClick={this.switch.bind(null, "register")}>Click here to register</a> 
+                           : null}
+                        {this.state.register ? <a href="#" onClick={this.switch.bind(null, "login")}>Cancel</a> : null }
 								</div>
-							</div>
-						</div>
-					</div>
-				</Row>
-			</Container>	
-		);
-	}
+                     </div>
+                  </div>
+               </div>
+            </Row>
+         </Container>
+      );
+   }
 }
 export default LandingPage;

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { Alert, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Alert, } from 'reactstrap';
+import { Container, Row, Input,} from 'mdbreact';
 import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
@@ -87,30 +88,29 @@ class AddNew extends Component {
 				<Row >
 					<div className="content">
 						{this.getAlert()}
-						<Form>
-							<FormGroup>
-								<Input type="select" name="category" value={this.state.category} onChange={this.handleInputChange}>
-									<option value="" disabled={true} hidden={true}>Select Category</option>
+						<form>
+							<div className="select">
+								<select type="select" name="category" className="select-text" required value={this.state.category} onChange={this.handleInputChange}>
+									<option value="" disabled selected></option>
 									<option value={'Film'}>Movies</option>
 									<option value={'Television'}>TV</option>
 									<option value={'Book'}>Books</option>
 									<option value={'Music'}>Music</option>
 									<option value={'Other'}>Other</option>
-								</Input>
-							</FormGroup>
-							<FormGroup>
-								<Input
-									type="text"
-									name="name"
-									id="dynamic-label-input"
-									placeholder="Title"
-									value={this.state.name}
-									onChange={this.handleInputChange} 
-									>
-								</Input>
-								<Label for="dynamic-label-input">Title</Label>
-							</FormGroup>
-							<FormGroup>
+								</select>
+								<span className="select-highlight"></span>
+								<span className="select-bar"></span>
+								<label className="select-label">Select category</label>
+							</div>
+
+							<Input 
+								label="Title" 
+								group
+								type="text" 
+								name="name" 
+								value={this.state.name}
+								onChange={this.handleInputChange} 
+								/>
 								<Textarea
 									rows="1"
 									maxLength="3000"
@@ -122,12 +122,11 @@ class AddNew extends Component {
 									onChange={this.handleInputChange}
 								>	
 								</Textarea>
-								
-							</FormGroup>
+
 							<div className="button-div">
-								<button className="btn1" onClick={this.handleSubmit}>Submit</button>
+							<button className="btn btn-outline-secondary waves-effect" onClick={this.handleSubmit}>Submit</button>
 							</div>
-						</Form>
+						</form>
 					</div>
 				</Row>
 			</Container>

@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
  
 import  {store}  from './helpers/store'
 import { history } from './helpers/history';
-import './index.css';
 import App from './App';
 
 
