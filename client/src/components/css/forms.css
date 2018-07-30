@@ -1,35 +1,22 @@
-label {
-   position: absolute;
-   top: 0;
-   font-size: var(--font-size-small);
-   opacity: 1;
-   transform: translateY(0);
-   transition: all 0.2s ease-out;
- }
- input:placeholder-shown + label {
-   opacity: 0;
-   transform: translateY(1rem);
- }
- .ta, input[type='email'], input[type='password'], input[type='text']  {
+
+ .ta  {
    resize:none;
+   height: 200px;
    overflow: hidden;
    box-sizing: border-box;
    -webkit-box-sizing: border-box;
    -moz-box-sizing: border-box;
    outline: none;
    display: block;
+   font: 18px;
+   color: #7f697c;
    width: 100%;
    padding: 7px;
    border: none;
-   border-bottom: 1px solid #ddd;
+   border-bottom: 1px solid #997e94;
    background: transparent;
    margin-bottom: 10px;
-   font: 16px Arial, Helvetica, sans-serif;
-   height: 45px;
    border-radius: 0;
- }
- .ta {
-   height: 200px;
  }
  .form-control:focus {
    border-color: none;
@@ -40,19 +27,30 @@ label {
    position: relative;
    padding-top: 1.5rem;
  }
+ .md-form input[type="text"], .md-form input[type="password"], .md-form input[type="email"] {
+   border-bottom: 1px solid #997e94;
+ }
  .md-form label {
    top: 2.0rem;
+   font-size: 18px;
+   color: #7f697c;
  }
  .md-form label.active{
    font-size: 14px;
+ }
+ @media (max-width: 350px) {
+   .select, .select-text, .select-bar {
+       width: 280px !important;
+   } 
  }
  .select {
    font-family:
      'Roboto','Helvetica','Arial',sans-serif;
     position: relative;
-    max-width: 350px;
+    width: 350px;
+    top: 30px;
+    padding-bottom: 15px;
  }
-
  .select-text {
     position: relative;
     font-family: inherit;
@@ -62,7 +60,7 @@ label {
     font-size: 18px;
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid rgba(0,0,0, 0.12);
+    border-bottom: 1px solid #997e94;
  }
  .select-text:focus {
     outline: none;
@@ -83,11 +81,11 @@ label {
     content: '';
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid rgba(0, 0, 0, 0.12);
+    border-top: 6px solid #997e94;
     pointer-events: none;
  }
  .select-label {
-    color: rgba(0,0,0, 0.26);
+    color: #7f697c;
     font-size: 18px;
     font-weight: normal;
     position: absolute;
@@ -138,48 +136,14 @@ label {
    float: right;
    padding-top: 20px;
  }
+ .btn-outline-secondary,  .btn-outline-secondary:hover {
+   border: 2px solid #7b59f5 !important;
+   color: #7b59f5 !important
+ }
  @media (max-width: 768px) {
    .btn{
        margin-bottom: 5px;
    } 
- }
- .btn1 {
-   display:inline-block;
-   padding:0.35em 1.2em;
-   border:0.16em solid #fff;
-   box-sizing: border-box;
-   text-decoration:none;
-   text-transform:uppercase;
-   font-weight:400;
-   color: #9796f0;
-   text-align:center;
-   transition: all 0.15s;
-   background-color: white;
- }
- .btn1:hover {
-   color: aqua;
-   border-color:aqua;
- }
- .btn2 {
-   display:inline-block;
-   padding:0.35em 1.2em;
-   border:0.16em solid red;
-   box-sizing: border-box;
-   text-decoration:none;
-   text-transform:uppercase;
-   font-weight:400;
-   color:red;
-   background-color: transparent;
-   text-align:center;
-   transition: all 0.15s;
- }
- .btn2:hover {
-   color: plum;
-   border-color:plum;
- }
- .btn1:active, .btn2:active {
-   color:black;
-   border-color:black;
  }
  @media all and (max-width:30em) {
    .btn1, .btn2 {

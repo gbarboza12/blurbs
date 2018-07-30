@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { Alert, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Alert } from 'reactstrap';
+import { Button, Container, Row, Input, } from 'mdbreact';
 import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
@@ -132,38 +133,45 @@ class EditBlurb extends Component {
 				<Row>
 					<div className="content">
 						{this.getAlert()}
-						<Form>
-							<FormGroup>
-								<Label>Category</Label>
-								<Input type="select" name="category" value={this.state.members.category} onChange={this.handleInputChange}>
+						<form>
+							<div className="select">
+								<select type="select" name="category" className="select-text" required value={this.state.members.category} onChange={this.handleInputChange}>
 									<option value="" disabled={true} hidden={true}>Select Category</option>
 									<option value={'Film'}>Movies</option>
 									<option value={'Television'}>TV</option>
 									<option value={'Book'}>Books</option>
 									<option value={'Music'}>Music</option>
 									<option value={'Other'}>Other</option>
-								</Input>
-							</FormGroup>
-							<FormGroup>
-								<Label>Title</Label>
-								<Input type="text" name="name" placeholder="Title" value={this.state.members.name} onChange={this.handleInputChange} />
-							</FormGroup>
-							<FormGroup>
-								<Label>Blurb</Label>
-								<Textarea
-									rows="1"
-									maxLength="3000"
-									className="ta"
-									name="content"
-									placeholder="Blurb"
-									value={this.state.members.content}
-									onChange={this.handleInputChange} />
-							</FormGroup>
-							<div className='button-div'>
-								<button className="btn1" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</button>{'  '}
-								<button className="btn2" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</button>
+								</select>
+								<span className="select-highlight"></span>
+								<span className="select-bar"></span>
+								<label className="select-label">Select category</label>
 							</div>
-						</Form>
+
+							<Input
+								label="Title"
+								group
+								type="text"
+								name="name"
+								value={this.state.members.name}
+								onChange={this.handleInputChange}
+							/>
+							<label>Blurb</label>
+							<Textarea
+								rows="2"
+								maxLength="3000"
+								className="ta"
+								name="content"
+								placeholder="Blurb"
+								value={this.state.members.content} 
+								onChange={this.handleInputChange}
+							/>
+
+							<div className='button-div'>
+								<Button outline color="secondary" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</Button>{'  '}
+								<Button outline color="danger" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</Button>
+							</div>
+						</form>
 					</div>
 				</Row>
 			</Container>

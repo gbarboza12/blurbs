@@ -44,7 +44,6 @@ class Login extends React.Component {
 			<div>
 				<div className="text-center">
 					<h3>Login</h3>
-					<hr className="hr-light" />
 				</div>
 
 				<form onSubmit={this.handleSubmit}>

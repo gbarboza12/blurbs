@@ -5,15 +5,18 @@ html, body, .view {
   -o-background-size: cover;
   background-size: cover;
   background-attachment: fixed;
-  background: #9796f0;  /* fallback for old browsers */
+  background: #fbc7d4;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #fbc7d4, #9796f0);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #fbc7d4, #9796f0) fixed; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
 }
 .row {
   display: block !important;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  color: #997e94;
 }
 .App-header {
   background-color: transparent;
@@ -28,7 +31,8 @@ body {
 .navigation__link {
 	display: block;
 	padding: 0 20px;
-	font-size: 16px;
+  font-size: 16px;
+  font-weight: bold;
 	line-height: 50px /* Collapsed navigation height */;
 	text-decoration: none;
 	color: #fff;
@@ -36,7 +40,7 @@ body {
   text-transform:uppercase;
 }
 .navigation__link:hover {
-  color: aquamarine;
+  color: #a78eff;
 }
 .navigation__list {
 	display: inline-flex;

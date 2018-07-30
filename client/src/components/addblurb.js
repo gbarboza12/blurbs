@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert, } from 'reactstrap';
-import { Container, Row, Input,} from 'mdbreact';
+import { Button, Container, Row, Input,} from 'mdbreact';
 import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
@@ -112,7 +112,7 @@ class AddNew extends Component {
 								onChange={this.handleInputChange} 
 								/>
 								<Textarea
-									rows="1"
+									rows="2"
 									maxLength="3000"
 									className="ta"
 									name="content"
@@ -124,7 +124,7 @@ class AddNew extends Component {
 								</Textarea>
 
 							<div className="button-div">
-							<button className="btn btn-outline-secondary waves-effect" onClick={this.handleSubmit}>Submit</button>
+							<Button outline color="secondary" onClick={this.handleSubmit}>Submit</Button>
 							</div>
 						</form>
 					</div>
