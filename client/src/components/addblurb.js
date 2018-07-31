@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert, } from 'reactstrap';
-import { Button, Container, Row, Input,} from 'mdbreact';
+import { Container, Row, Input,} from 'mdbreact';
 import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
@@ -88,7 +88,7 @@ class AddNew extends Component {
 				<Row >
 					<div className="content">
 						{this.getAlert()}
-						<form>
+						<form onSubmit={this.handleSubmit}>
 							<div className="select">
 								<select type="select" name="category" className="select-text" required value={this.state.category} onChange={this.handleInputChange}>
 									<option value="" disabled selected></option>
@@ -102,7 +102,6 @@ class AddNew extends Component {
 								<span className="select-bar"></span>
 								<label className="select-label">Select category</label>
 							</div>
-
 							<Input 
 								label="Title" 
 								group
@@ -124,7 +123,7 @@ class AddNew extends Component {
 								</Textarea>
 
 							<div className="button-div">
-							<Button outline color="secondary" onClick={this.handleSubmit}>Submit</Button>
+								<button className="btn btn-outline-secondary waves-effect">Submit</button>
 							</div>
 						</form>
 					</div>

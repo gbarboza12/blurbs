@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert } from 'reactstrap';
-import { Button, Container, Row, Input, } from 'mdbreact';
+import { Container, Row, Input, } from 'mdbreact';
 import Textarea from 'react-expanding-textarea';
 
 import { authHeader } from '../helpers/authheader';
@@ -147,7 +147,6 @@ class EditBlurb extends Component {
 								<span className="select-bar"></span>
 								<label className="select-label">Select category</label>
 							</div>
-
 							<Input
 								label="Title"
 								group
@@ -166,10 +165,9 @@ class EditBlurb extends Component {
 								value={this.state.members.content} 
 								onChange={this.handleInputChange}
 							/>
-
 							<div className='button-div'>
-								<Button outline color="secondary" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</Button>{'  '}
-								<Button outline color="danger" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</Button>
+								<button className="btn btn-outline-secondary waves-effect" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</button>{'  '}
+								<button className="btn btn-outline-danger waves-effect" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</button>
 							</div>
 						</form>
 					</div>
@@ -178,7 +176,6 @@ class EditBlurb extends Component {
 		);
 	}
 }
-
 function mapStateToProps(state) {
 	const { authentication } = state;
 	const { user } = authentication;
@@ -186,5 +183,4 @@ function mapStateToProps(state) {
 		user
 	};
 }
-
 export default connect(mapStateToProps)(EditBlurb);

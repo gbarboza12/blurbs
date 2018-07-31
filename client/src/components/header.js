@@ -11,6 +11,7 @@ class Header extends Component {
                 <ul className="navigation__list">
                     <li><Link className="navigation__link" to='/'>Home</Link></li>
                     <li  ><Link className="navigation__link" to='/addBlurb'>Add</Link></li>
+                    <li  ><Link className="navigation__link" to='/queue'>Queue</Link></li>
                     <li  ><Link className="navigation__link" to='/landingpage'>Logout</Link></li>
                 </ul>
             );
@@ -18,8 +19,6 @@ class Header extends Component {
             return (
                 <ul className="navigation__list">
                     <li><Link className="navigation__link" to='/'>Home</Link></li>
-                    <li><Link className="navigation__link" to='/register'>Register</Link></li>
-                    <li><Link className="navigation__link" to='/landingpage'>Login</Link></li>
                 </ul>
             );
         }

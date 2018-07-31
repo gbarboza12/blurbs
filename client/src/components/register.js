@@ -73,7 +73,7 @@ class Register extends Component {
 					}
 					<div className="text-center">
 					<button className="btn btn-outline-secondary waves-effect">Register</button>
-						<br /><br />
+						<br />
 						{registering}
 					</div>
 				</form>

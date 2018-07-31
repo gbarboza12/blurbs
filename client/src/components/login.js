@@ -71,7 +71,7 @@ class Login extends React.Component {
 						}
 					<div className="text-center">
 						<button className="btn btn-outline-secondary waves-effect">Login</button>
-						<br /><br />
+						<br />
 						{loggingIn}
 					</div>
 				</form>
