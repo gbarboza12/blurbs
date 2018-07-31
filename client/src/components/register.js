@@ -72,7 +72,7 @@ class Register extends Component {
 						<div className="help-block">Password is required</div>
 					}
 					<div className="text-center">
-						<button class="btn btn-outline-secondary waves-effect" >Register</button>
+					<button className="btn btn-outline-secondary waves-effect">Register</button>
 						<br /><br />
 						{registering}
 					</div>

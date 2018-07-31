@@ -35,7 +35,7 @@ async function getById(id) {
  
 async function create(userParam) {
     if (await User.findOne({ email: userParam.email })) {
-        throw 'email "' + userParam.email + '" is already taken';
+        throw 'Email "' + userParam.email + '" is already taken';
     }
  
     const user = new User(userParam);
@@ -52,7 +52,7 @@ async function update(id, userParam) {
  
     if (!user) throw 'User not found';
     if (user.email !== userParam.email && await User.findOne({ email: userParam.email })) {
-        throw 'email "' + userParam.email + '" is already taken';
+        throw 'Email "' + userParam.email + '" is already taken';
     }
  
     if (userParam.password) {

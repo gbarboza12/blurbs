@@ -70,7 +70,7 @@ class Login extends React.Component {
 							<div className="help-block">Password is required</div>
 						}
 					<div className="text-center">
-						<button class="btn btn-outline-secondary waves-effect">Login</button>
+						<button className="btn btn-outline-secondary waves-effect">Login</button>
 						<br /><br />
 						{loggingIn}
 					</div>
