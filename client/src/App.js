@@ -1,9 +1,9 @@
 import React from 'react';
-import 'font-awesome/css/font-awesome.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import './App.css';
-import './components/css/forms.css'
+import './components/css/queue.css';
+import './components/css/forms.css';
+
 import Header from './components/header'
 import Main from './components/main'
 

@@ -1,0 +1,7 @@
+.radio-label-complete {
+    text-decoration: line-through;
+ }
+ .pretty {
+    display: flex;
+    margin:0 0 20px 0;
+ }

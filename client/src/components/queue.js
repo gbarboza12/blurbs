@@ -10,7 +10,6 @@ class Queue extends Component {
       this.state = {
          category: '',
          item: '',
-         completed: '',
          items: [],
          error: null,
       };
@@ -18,11 +17,11 @@ class Queue extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
       this.deleteItem = this.deleteItem.bind(this);
+      this.completeItem = this.completeItem.bind(this);
    }
 
    handleSubmit(e) {
       e.preventDefault();
-      console.log('submit')
 		const item = this.state.item;
 
 		if (!item) {
@@ -32,8 +31,9 @@ class Queue extends Component {
 			return;
       }
       var newItem = {
+         key: Date.now(),
          item: this.state.item,
-         key: Date.now()
+         completed: false,
       }
 		this.setState({ 
          item: '', 
@@ -43,6 +43,7 @@ class Queue extends Component {
 		
 	}
 	handleInputChange(e) {
+      console.log("input change")
 		const target = e.target;
 		const value = target.value;
 		const name = target.name;
@@ -59,6 +60,14 @@ class Queue extends Component {
         items: filteredItems
       });
    }
+   completeItem(key, current) {
+      this.setState({
+         ...this.state,
+         items: this.state.items.map(item => item.key === key ?
+            {...item, completed: !current} : item
+         )
+      })
+   }
 
    render() {
       return (
@@ -67,7 +76,7 @@ class Queue extends Component {
 					<div className="content">
                {this.state.error && <Alert color="danger">Error: {this.state.error}</Alert>}
 						<form onSubmit={this.handleSubmit}>
-							<Input 
+							<Input
 								label="Title" 
 								group
 								type="text" 
@@ -76,14 +85,14 @@ class Queue extends Component {
 								onChange={this.handleInputChange} 
 								/>
 
-							<div className="button-div">
+							{/* <div className="button-div">
 								<button className="btn btn-outline-secondary waves-effect">Submit</button>
-							</div>
+							</div> */}
 						</form>
 					</div>
 				</Row>
             <Row>
-               <QueueItems entries={this.state.items} delete={this.deleteItem}/>
+               <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem}/>
             </Row>
 			</Container>
       )
