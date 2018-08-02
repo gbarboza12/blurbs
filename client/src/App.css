@@ -59,6 +59,9 @@ body {
     padding: 0 15px;
   }
 }
+.headings {
+  padding: 12px 5px;
+}
 .content {
   padding: 30px;
   margin-left: auto;

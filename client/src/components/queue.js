@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Input, } from 'mdbreact';
+import { Container, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import { Alert, } from 'reactstrap';
 
 import QueueItems from './queueitems';
@@ -35,10 +35,12 @@ class Queue extends Component {
       var newItem = {
          key: Date.now(),
          item: this.state.item,
+         category: this.state.category,
          completed: false,
       }
       this.setState({
          item: '',
+         category: '',
          error: null,
          items: [...this.state.items, newItem],
          addNew: false,
@@ -49,7 +51,8 @@ class Queue extends Component {
       const value = target.value;
       const name = target.name;
       this.setState({
-         [name]: value
+         [name]: value,
+         error: null,
       });
    }
    deleteItem(key) {
@@ -70,36 +73,49 @@ class Queue extends Component {
       })
    }
    addItem() {
-      this.setState({addNew: true})
+      this.setState({ addNew: true })
    }
 
    render() {
       return (
          <Container>
-            <Row >
-               <div className="content">
-                  {this.state.error && <Alert color="danger">Error: {this.state.error}</Alert>}
-               </div>
-            </Row>
-            <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem} />
+            <div className="headings"><h3>Queue</h3></div>
+            {this.state.error ?
+               <Alert color="danger">Error: {this.state.error}</Alert>
+               : null}
             {this.state.addNew ?
-            <div className="content">
-               <form onSubmit={this.handleSubmit}>
-                  <Input
-                     label="Title"
-                     group
-                     type="text"
-                     name="item"
-                     value={this.state.item}
-                     onChange={this.handleInputChange}
-                  />
-               </form> 
+               <div className="queue-content">
+                  <form onSubmit={this.handleSubmit}>
+                     <input
+                        className="queue-input"
+                        placeholder="Title"
+                        type="text"
+                        name="item"
+                        value={this.state.item}
+                        onChange={this.handleInputChange}
+                     />
+                     <button className="btn btn-link btn-queue-add">Add</button>
+                     <Dropdown size="sm">
+                        <DropdownToggle caret>
+                           {this.state.category ? this.state.category : 'Category' }
+                        </DropdownToggle>
+                        <DropdownMenu>
+                           <DropdownItem name="category" value="Film" onClick={this.handleInputChange}>Film</DropdownItem>
+                           <DropdownItem name="category" value="Television" onClick={this.handleInputChange}>Television</DropdownItem>
+                           <DropdownItem name="category" value="Music" onClick={this.handleInputChange}>Music</DropdownItem>
+                           <DropdownItem name="category" value="Book" onClick={this.handleInputChange}>Book</DropdownItem>
+                           <DropdownItem name="category" value="Other" onClick={this.handleInputChange}>Other</DropdownItem>
+                        </DropdownMenu>
+                        (Optional)
+                     </Dropdown> 
+                  </form>
                </div>
                : null
             }
+            <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem} />
             <div className="row-add">
-               <a href="#" className= "float" onClick={this.addItem}>
-                  <i className= "fa fa-plus my-float"></i>
+               <a href="#" className="float" onClick={this.addItem}>
+                  <i className="fa fa-plus my-float"></i>
                </a>
             </div>
          </Container>
