@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Container, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import { Alert, } from 'reactstrap';
 
+import { authHeader } from '../helpers/authheader';
 import QueueItems from './queueitems';
 
 class Queue extends Component {
@@ -14,6 +16,7 @@ class Queue extends Component {
          error: null,
          addNew: false,
       };
+      this.pollInterval = null;
 
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,9 +25,35 @@ class Queue extends Component {
       this.addItem = this.addItem.bind(this);
    }
 
+   componentDidMount() {
+      this.loadQueueEntriesFromServer();
+      if (!this.pollInterval) {
+        this.pollInterval = setInterval(this.loadQueueEntriesFromServer, 2000);
+      }
+  }
+  componentWillUnmount() {
+      if (this.pollInterval) clearInterval(this.pollInterval);
+      this.pollInterval = null;
+  }
+  loadQueueEntriesFromServer = () => {
+      const { user } = this.props;
+      
+      fetch(`/api/queue/${user._id}`, {
+          method: 'GET', 
+          headers: {'Authorization' : authHeader()}
+      }).then(data => data.json())
+        .then((res) => {
+          if (!res.success) {this.setState({ error: res.error }); console.log(this.state.error)}
+          else {this.setState({ items: res.data }); }
+        });
+  }
    handleSubmit(e) {
       e.preventDefault();
       const item = this.state.item;
+      const category = this.state.category;
+      const completed = false;
+      const date = new Date().toISOString();
+      const { user } = this.props;
 
       if (!item) {
          this.setState({
@@ -32,19 +61,24 @@ class Queue extends Component {
          })
          return;
       }
-      var newItem = {
-         key: Date.now(),
-         item: this.state.item,
-         category: this.state.category,
-         completed: false,
-      }
-      this.setState({
-         item: '',
-         category: '',
-         error: null,
-         items: [...this.state.items, newItem],
-         addNew: false,
-      });
+      fetch('/api/queue', {
+			method: 'POST',
+			headers: new Headers({
+				'Content-Type': 'application/json',
+				'Authorization': authHeader()
+			}),
+			body: JSON.stringify({ item, category, completed, date, user }),
+		}).then(res => res.json()).then((res) => {
+			if (!res.success) {
+				this.setState({ error: res.error.message || res.error, alertText: 'Error' });
+				console.log(this.state.error)
+			}
+			else this.setState({ 
+            item: '',
+            category: '', 
+            error: null,
+            addNew: false });
+		});
    }
    handleInputChange(e) {
       const target = e.target;
@@ -55,22 +89,51 @@ class Queue extends Component {
          error: null,
       });
    }
-   deleteItem(key) {
+   deleteItem(queueId) {
       var filteredItems = this.state.items.filter(function (item) {
-         return (item.key !== key);
+         return (item.key !== queueId);
       });
 
-      this.setState({
-         items: filteredItems
+      const { user } = this.props;
+      fetch(`/api/queue/${user._id}/${queueId}`, {
+			method: 'DELETE',
+			headers: new Headers({
+				'Content-Type': 'application/json',
+				'Authorization': authHeader()
+			}),
+		}).then(res => res.json()).then((res) => {
+			if (!res.success) this.setState({ error: res.error});
+			else this.setState({
+				items: filteredItems,
+				error: null,
+			});
       });
    }
-   completeItem(key, current) {
-      this.setState({
-         ...this.state,
-         items: this.state.items.map(item => item.key === key ?
-            { ...item, completed: !current } : item
-         )
-      })
+   completeItem(queueId, current) {
+      console.log(current)
+      const completed = !current;
+      const { user } = this.props;
+		fetch(`/api/queue/${user._id}/${queueId}`, {
+			method: 'PUT',
+			headers: new Headers({
+				'Content-Type': 'application/json',
+				'Authorization': authHeader()
+			}),
+			body: JSON.stringify({ completed, user }),
+		}).then(res => res.json()).then((res) => {
+			if (!res.success) {
+				this.setState({
+					error: res.error.message || res.error,
+				});
+				console.log(this.state.error)
+			} else this.setState({
+               error: null,
+               ...this.state,
+               items: this.state.items.map(item => item._id === queueId ?
+                  { ...item, completed: !current } : item
+               )
+            });
+         });
    }
    addItem() {
       this.setState({ addNew: true })
@@ -122,5 +185,11 @@ class Queue extends Component {
       )
    }
 }
-
-export default Queue
+function mapStateToProps(state) {
+	const { authentication } = state;
+	const { user } = authentication;
+	return {
+		user
+	};
+}
+export default connect(mapStateToProps)(Queue);

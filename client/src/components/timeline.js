@@ -21,7 +21,7 @@ class Timeline extends Component {
     componentDidMount() {
         this.loadBlurbsFromServer();
         if (!this.pollInterval) {
-          this.pollInterval = setInterval(this.loadBlurbsFromServer, 5000);
+          this.pollInterval = setInterval(this.loadBlurbsFromServer, 10000);
         }
     }
     componentWillUnmount() {

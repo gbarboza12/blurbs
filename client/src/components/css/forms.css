@@ -136,10 +136,7 @@
    float: right;
    padding-top: 20px;
  }
- .btn-outline-secondary, .btn-outline-secondary:hover, .btn-outline-secondary:focus {
-   border: 2px solid #7b59f5 !important;
-   color: #7b59f5 !important
- }
+
  @media (max-width: 768px) {
    .btn{
        margin-bottom: 5px;

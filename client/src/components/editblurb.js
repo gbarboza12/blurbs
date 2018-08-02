@@ -54,8 +54,7 @@ class EditBlurb extends Component {
 					alertText: 'Error',
 				});
 				console.log(this.state.error)
-			}
-			else this.setState({
+			} else this.setState({
 				alertText: 'Updated',
 				error: null
 			});
