@@ -2,9 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import { Alert, } from 'reactstrap';
+import Button from '@material-ui/core/Button';
+import compose from 'recompose/compose';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 import { authHeader } from '../helpers/authheader';
 import QueueItems from './queueitems';
+
+const styles = theme => ({
+  button: {
+	 marginRight: '-5px',
+	 marginBottom: '-17px',
+	 marginTop: '-5px',
+	//  margin: theme.spacing.unit,
+	 color: '#EDE7F6 !important',
+	 backgroundColor: '#673AB7 !important'
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
+});
 
 class Queue extends Component {
    constructor(props) {
@@ -140,12 +158,26 @@ class Queue extends Component {
    }
 
    render() {
+    const { classes } = this.props;
       return (
          <Container>
-            <div className="headings"><h3>Queue</h3></div>
-            {this.state.error ?
-               <Alert color="danger">Error: {this.state.error}</Alert>
-               : null}
+            <div className="headings">
+            	<h3>Queue</h3>
+            </div>
+				
+				{this.state.error ?
+					<Alert color="danger">Error: {this.state.error}</Alert>
+					: null}
+
+				{!this.state.addNew ?
+					<div className="text-right">
+						<Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={this.addItem}>
+							<i className="fa fa-plus my-float" ></i>
+						</Button>
+					</div>
+					: null
+				}
+            
             {this.state.addNew ?
                <div className="queue-content">
                   <form onSubmit={this.handleSubmit}>
@@ -176,12 +208,6 @@ class Queue extends Component {
                : null
             }
             <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem} />
-            
-            <div className="row-add">
-               <a href="#" className="float" onClick={this.addItem}>
-                  <i className="fa fa-plus my-float"></i>
-               </a>
-            </div>
          </Container>
       )
    }
@@ -193,4 +219,12 @@ function mapStateToProps(state) {
 		user
 	};
 }
-export default connect(mapStateToProps)(Queue);
+Queue.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default compose(
+	withStyles(styles, {
+	  name: 'styles',
+	}),
+	connect(mapStateToProps),
+ )(Queue);

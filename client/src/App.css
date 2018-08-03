@@ -60,7 +60,8 @@ body {
   }
 }
 .headings {
-  padding: 12px 5px;
+  padding-left: 5px;
+  padding-top: 12px;
 }
 .content {
   padding: 30px;

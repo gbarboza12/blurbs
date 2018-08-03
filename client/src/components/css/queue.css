@@ -10,9 +10,12 @@
    display: flex;
    -ms-flex-wrap: wrap;
    flex-wrap: wrap;
-   padding-top: 20px;
+   padding-top: 14px;
    height: 100%;
    border-bottom: 1px solid #d1c9f0;
+ }
+ .no-entries {
+   padding: 20px;
  }
  .queue-input {
    background-color: transparent; 
@@ -21,7 +24,6 @@
    border-color: #a78eff;
    margin: 10px;
    width: 70%;
-
  }
  .btn-queue-add {
     padding: 0;
@@ -34,81 +36,29 @@
    color: #745cca !important;
    text-decoration: none;
  }
-.radio-label-complete {
+.label-complete {
    text-decoration: line-through;
    color: rgb(134, 117, 117);
+   cursor: pointer;
+   margin-bottom: 0rem !important;
  }
- .pretty {
-   display: -webkit-flex; /* Safari */
-   -webkit-flex-wrap: wrap; /* Safari 6.1+ */
-   flex-wrap: wrap;
-   margin:0 0 5px 0;
-   white-space: normal;
-   word-break: break-all;
- }
- .pretty .state label {
-   display: block;
-   float: left;
-   padding-right: 10px;
-   padding-left: 25px;
-   text-indent: 0;
- }
- .pretty .state label::before, .pretty .state label::after {
-    top: 0;
-    border-color: #a78eff;
- }
- .pretty.p-icon .state .icon {
-    top: 0px;
- }
- .pretty input:checked ~ .state.p-info label::after, .pretty.p-toggle .state.p-info label::after {
-   background-color:#a78eff !important;
-   border-radius: 20% !important;
- }
+ .label-incomplete {
+  cursor: pointer;
+  margin-bottom: 0rem !important;
+}
  .delete-icon {
    cursor: pointer;
-   color: #ffb1e2;
+   color: #F48FB1;
  }
  .delete-icon:hover {
    cursor: pointer;
-   color: #942571;
+   color: #AD1457;
  }
  .queue-category {
    font-size:12px;
-   padding: 5px 5px;
+   padding-left: 9px;
+   padding-bottom: 7px;
  }
-  /* floating button */
- .row-add {
-   display: flex; justify-content: center;
- }
- .label-container{
-	position:fixed;
-	bottom:48px;
-	right:105px;
-	display:table;
-	visibility: hidden;
-}
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	background-color:#abe9ff;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #636466;
-}
 .my-float{
-	font-size:24px;
-	margin-top:18px;
-}
-a.float + div.label-container {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0.5s ease;
-}
-a.float:hover + div.label-container{
-  visibility: visible;
-  color:#942571;;
-  opacity: 1;
+	font-size: 18px;
 }
