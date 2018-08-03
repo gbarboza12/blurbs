@@ -176,6 +176,7 @@ class Queue extends Component {
                : null
             }
             <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem} />
+            
             <div className="row-add">
                <a href="#" className="float" onClick={this.addItem}>
                   <i className="fa fa-plus my-float"></i>

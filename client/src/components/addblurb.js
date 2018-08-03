@@ -2,11 +2,31 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert, } from 'reactstrap';
-import { Container, Row, Input,} from 'mdbreact';
-import Textarea from 'react-expanding-textarea';
+import { Container, } from 'mdbreact';
+import compose from 'recompose/compose';
+
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 
 import { authHeader } from '../helpers/authheader';
 // import * as FontAwesome from 'react-fontawesome';
+
+const styles = theme => ({
+
+	formControl: {
+	  margin: theme.spacing.unit,
+	  minWidth: 120,
+	  width: 200,
+	},
+	selectEmpty: {
+	  marginTop: theme.spacing.unit * 2,
+	},
+ });
 
 class AddNew extends Component {
 	constructor(props) {
@@ -57,13 +77,16 @@ class AddNew extends Component {
 		});
 	}
 	handleInputChange(e) {
-		const target = e.target;
-		const value = target.type === 'select' ? target.selected : target.value;
-		const name = target.name;
 		this.setState({
-			[name]: value
+			[e.target.name]: e.target.value,
+			alertText: ''
 		});
 	}
+	handleChange = name => event => {
+		this.setState({
+		  [name]: event.target.value,
+		});
+	 };
 	getAlert() {
 		if(this.state.alertText === 'Success') {
 			return (
@@ -83,51 +106,57 @@ class AddNew extends Component {
 	}
 
 	render() {
+		const { classes } = this.props;
 		return (
 			<Container>
-				<Row >
-					<div className="content">
-						{this.getAlert()}
-						<form onSubmit={this.handleSubmit}>
-							<div className="select">
-								<select type="select" name="category" className="select-text" required value={this.state.category} onChange={this.handleInputChange}>
-									<option value="" disabled selected></option>
-									<option value={'Film'}>Movies</option>
-									<option value={'Television'}>TV</option>
-									<option value={'Book'}>Books</option>
-									<option value={'Music'}>Music</option>
-									<option value={'Other'}>Other</option>
-								</select>
-								<span className="select-highlight"></span>
-								<span className="select-bar"></span>
-								<label className="select-label">Select category</label>
-							</div>
-							<Input 
-								label="Title" 
-								group
-								type="text" 
-								name="name" 
-								value={this.state.name}
-								onChange={this.handleInputChange} 
-								/>
-								<Textarea
-									rows="2"
-									maxLength="3000"
-									className="ta"
-									name="content"
-									id="dynamic-label-input"
-									placeholder="Blurb"
-									value={this.state.content}
-									onChange={this.handleInputChange}
-								>	
-								</Textarea>
+				<div className="headings"><h3>Add Entry</h3></div>
+				{this.getAlert()}
 
-							<div className="button-div">
-								<button className="btn btn-outline-secondary waves-effect">Submit</button>
-							</div>
+					<div className="entry-content">
+					<form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
+						<FormControl required className={classes.formControl}>
+							<InputLabel>Category</InputLabel>
+							<Select
+								value={this.state.category}
+								onChange={this.handleInputChange}
+								name="category"
+								className={classes.selectEmpty}
+							>
+							<MenuItem value={'Film'}>Movies</MenuItem>
+							<MenuItem value={'Television'}>TV</MenuItem>
+							<MenuItem value={'Books'}>Books</MenuItem>
+							<MenuItem value={'Music'}>Music</MenuItem>
+							<MenuItem value={'Other'}>Other</MenuItem>
+							</Select>
+						</FormControl>
+						<div>
+							<TextField
+								required
+								label="Title"
+								placeholder="Title"
+								className="tf-title"
+								value={this.state.name}
+								onChange={this.handleChange('name')}
+							/>
+						</div>
+						<div>
+						<TextField
+							required
+							label="Blurb"
+							placeholder="Blurb"
+							multiline
+							fullWidth
+							margin="normal"
+							className="ta"
+							value={this.state.content}
+							onChange={this.handleChange('content')}
+						/>
+						</div>
+						<div className=" button-div">
+							<button className="btn btn-outline-secondary waves-effect">Submit</button>
+						</div>
 						</form>
 					</div>
-				</Row>
 			</Container>
 		);
 	}
@@ -140,5 +169,13 @@ function mapStateToProps(state) {
 		user
 	};
 }
-
-export default connect(mapStateToProps)(AddNew);
+AddNew.propTypes = {
+	classes: PropTypes.object.isRequired,
+ };
+ 
+export default compose(
+	withStyles(styles, {
+	  name: 'styles',
+	}),
+	connect(mapStateToProps),
+ )(AddNew);

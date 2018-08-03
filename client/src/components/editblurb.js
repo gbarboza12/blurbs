@@ -2,10 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert } from 'reactstrap';
-import { Container, Row, Input, } from 'mdbreact';
-import Textarea from 'react-expanding-textarea';
+import { Container, } from 'mdbreact';
+import compose from 'recompose/compose';
+
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 
 import { authHeader } from '../helpers/authheader';
+
+const styles = theme => ({
+
+	formControl: {
+		margin: theme.spacing.unit,
+		minWidth: 120,
+		width: 200,
+	},
+	selectEmpty: {
+		marginTop: theme.spacing.unit * 2,
+	},
+});
 
 class EditBlurb extends Component {
 	constructor(props) {
@@ -85,16 +105,23 @@ class EditBlurb extends Component {
 		});
 	}
 	handleInputChange(e) {
-		const target = e.target;
-		const value = target.type === 'select' ? target.selected : target.value;
-		const name = target.name;
 		this.setState({
 			members: {
 				...this.state.members,
-				[name]: value
-			}
+				[e.target.name]: e.target.value
+			},
+			alertText: '',
 		});
 	}
+	handleTFChange = name => event => {
+		this.setState({
+			members: {
+				...this.state.members,
+				[name]: event.target.value,
+			},
+			alertText: ''
+		});
+	};
 	getAlert() {
 		if (this.state.alertText === 'Updated') {
 			return (
@@ -127,50 +154,58 @@ class EditBlurb extends Component {
 	}
 
 	render() {
+		const { classes } = this.props;
 		return (
 			<Container>
-				<Row>
-					<div className="content">
-						{this.getAlert()}
-						<form>
-							<div className="select">
-								<select type="select" name="category" className="select-text" required value={this.state.members.category} onChange={this.handleInputChange}>
-									<option value="" disabled={true} hidden={true}>Select Category</option>
-									<option value={'Film'}>Movies</option>
-									<option value={'Television'}>TV</option>
-									<option value={'Book'}>Books</option>
-									<option value={'Music'}>Music</option>
-									<option value={'Other'}>Other</option>
-								</select>
-								<span className="select-highlight"></span>
-								<span className="select-bar"></span>
-								<label className="select-label">Select category</label>
-							</div>
-							<Input
+				<div className="headings"><h3>Edit Entry</h3></div>
+				{this.getAlert()}
+				<div className="entry-content">
+					<form className={classes.root} autoComplete="off">
+
+						<FormControl required className={classes.formControl}>
+							<InputLabel>Category</InputLabel>
+							<Select
+								value={this.state.members.category}
+								onChange={this.handleInputChange}
+								name="category"
+								className={classes.selectEmpty}
+							>
+								<MenuItem value={'Film'}>Movies</MenuItem>
+								<MenuItem value={'Television'}>TV</MenuItem>
+								<MenuItem value={'Books'}>Books</MenuItem>
+								<MenuItem value={'Music'}>Music</MenuItem>
+								<MenuItem value={'Other'}>Other</MenuItem>
+							</Select>
+						</FormControl>
+						<div>
+							<TextField
+								required
 								label="Title"
-								group
-								type="text"
-								name="name"
+								placeholder="Title"
+								className="tf-title"
 								value={this.state.members.name}
-								onChange={this.handleInputChange}
+								onChange={this.handleTFChange('name')}
 							/>
-							<label>Blurb</label>
-							<Textarea
-								rows="2"
-								maxLength="3000"
-								className="ta"
-								name="content"
+						</div>
+						<div>
+							<TextField
+								required
+								label="Blurb"
 								placeholder="Blurb"
-								value={this.state.members.content} 
-								onChange={this.handleInputChange}
+								multiline
+								fullWidth
+								margin="normal"
+								className="ta"
+								value={this.state.members.content}
+								onChange={this.handleTFChange('content')}
 							/>
-							<div className='button-div'>
-								<button className="btn btn-outline-secondary waves-effect" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</button>{'  '}
-								<button className="btn btn-outline-danger waves-effect" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</button>
-							</div>
-						</form>
-					</div>
-				</Row>
+						</div>
+						<div className='button-div'>
+							<button className="btn btn-outline-secondary waves-effect" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</button>{'  '}
+							<button className="btn btn-outline-danger waves-effect" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</button>
+						</div>
+					</form>
+				</div>
 			</Container>
 		);
 	}
@@ -182,4 +217,12 @@ function mapStateToProps(state) {
 		user
 	};
 }
-export default connect(mapStateToProps)(EditBlurb);
+EditBlurb.propTypes = {
+	classes: PropTypes.object.isRequired,
+};
+export default compose(
+	withStyles(styles, {
+		name: 'styles',
+	}),
+	connect(mapStateToProps),
+)(EditBlurb);

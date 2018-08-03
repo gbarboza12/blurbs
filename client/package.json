@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.4.2",
     "bootstrap": "^4.1.2",
     "config": "^1.30.0",
     "history": "^4.7.2",
@@ -19,6 +20,7 @@
     "react-scripts": "1.1.4",
     "react-vertical-timeline-component": "^2.1.2",
     "reactstrap": "^6.3.0",
+    "recompose": "^0.28.1",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
