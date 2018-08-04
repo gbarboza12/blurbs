@@ -1,4 +1,4 @@
-const config = require('config.json');
+// const config = require('config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../helpers/db');
@@ -17,7 +17,7 @@ async function authenticate({ email, password }) {
     const user = await User.findOne({ email });
     if (user && bcrypt.compareSync(password, user.password)) {
         const { password, ...userWithoutHash } = user.toObject();
-        const token = jwt.sign({ sub: user.id }, config.secret);
+        const token = jwt.sign({ sub: user.id }, 'bryan');
         return {
             ...userWithoutHash,
             token

@@ -2,7 +2,8 @@
     "scripts": {
         "start:server": "cd backend && nodemon server.js --exec babel-node --presets es2015,stage-0",
         "start:client": "cd client && yarn start",
-        "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\""
+        "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\"",
+        "start": "concurrently \"cd backend && npm start\" \"cd client && npm start\""
     },
     "dependencies": {
         "babel-cli": "^6.26.0",

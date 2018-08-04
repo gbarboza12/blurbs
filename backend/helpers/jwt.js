@@ -1,11 +1,12 @@
+"use strict";
 const expressJwt = require('express-jwt');
-const config = require('config.json');
+// const config = require('config.json');
 const userService = require('../services/userservice');
  
 module.exports = jwt;
  
 function jwt() {
-    const secret = config.secret;
+    const secret = 'bryan';
     return expressJwt({ secret, isRevoked }).unless({
         path: [
             // public routes that don't require authentication
