@@ -17,25 +17,6 @@
  .no-entries {
    padding: 20px;
  }
- .queue-input {
-   background-color: transparent; 
-   border-style: solid; 
-   border-width: 0px 0px 1px 0px; 
-   border-color: #a78eff;
-   margin: 10px;
-   width: 70%;
- }
- .btn-queue-add {
-    padding: 0;
- }
- .btn.btn-link {
-    color: #805581 !important;
-    font-weight: bold;
- }
- .btn.btn-link:hover {
-   color: #745cca !important;
-   text-decoration: none;
- }
 .label-complete {
    text-decoration: line-through;
    color: rgb(134, 117, 117);
