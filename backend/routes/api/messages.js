@@ -13,14 +13,10 @@ router.get('/api/blurbs', (req, res) => {
 
 // gets the specified user's blurbs
 router.get('/api/blurbs/:id', (req, res) => {
-  Blurb.find({'author.id': req.user._id}).sort('-date').exec((err, blurbs) => {
+  Blurb.find({author: req.params.id}).sort('-date').exec((err, blurbs) => {
     if (err) return res.json({ success: false, error: err });
       return res.json({ success: true, data: blurbs });
   });
-  // Blurb.find({'author.id': req.user._id}, (err, blurbs) => {
-  //     if (err) return res.json({ success: false, error: err });
-  //     return res.json({ success: true, data: blurbs });
-  // });
 });
 
 // post a new blurb
