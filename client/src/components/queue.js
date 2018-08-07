@@ -19,9 +19,10 @@ const styles = theme => ({
   },
   margin: {
     margin: theme.spacing.unit,
+    marginRight: 13,
+    marginLeft: 20,
   },
   textField: {
-    marginLeft: 15,
     marginRight: theme.spacing.unit,
     width: 200,
     flexBasis: 200,
@@ -31,13 +32,16 @@ const styles = theme => ({
   },
   buttonAdd: {
     color: '#673AB7 !important',
+    marginBottom: '10px',
+    marginTop: '10px',
   },
   button: {
     marginRight: '-5px',
     marginBottom: '-17px',
     marginTop: '-5px',
     color: '#EDE7F6 !important',
-    backgroundColor: '#673AB7 !important'
+    backgroundColor: '#673AB7 !important', 
+    verticalAlign:'middle'
   },
 });
 
@@ -193,7 +197,7 @@ class Queue extends Component {
         }
 
         {this.state.addNew ?
-          <div className="queue-content">
+          <div className="queue-content add-queue-content">
             <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
               <TextField
                 label="Entry"
@@ -214,9 +218,11 @@ class Queue extends Component {
                 <MenuItem value={'Music'}>Music</MenuItem>
                 <MenuItem value={'Other'}>Other</MenuItem>
               </TextField> 
-              <div className="col-5 text-right">
-              <Button className={classes.buttonAdd} onClick={this.handleSubmit}>Add</Button>
-              </div>
+             
+             <div style={{margin: 'auto'}}>
+                <Button variant="contained" className={classes.buttonAdd} onClick={this.handleSubmit}>Add</Button>
+                </div>
+              
             </form>
           </div>
           : null

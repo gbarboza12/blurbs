@@ -17,14 +17,14 @@ import { authHeader } from '../helpers/authheader';
 
 const styles = theme => ({
 	formControl: {
-	  margin: theme.spacing.unit,
-	  minWidth: 120,
-	  width: 200,
+		margin: theme.spacing.unit,
+		minWidth: 120,
+		width: 200,
 	},
 	selectEmpty: {
-	  marginTop: theme.spacing.unit * 2,
+		marginTop: theme.spacing.unit * 2,
 	},
- });
+});
 
 class AddNew extends Component {
 	constructor(props) {
@@ -53,7 +53,7 @@ class AddNew extends Component {
 
 		if (!category || !name || !content || !date || !user) {
 			this.setState({
-				alertText: 'Error', 
+				alertText: 'Error',
 				error: 'Please fill in all of the fields.'
 			})
 			return;
@@ -82,21 +82,21 @@ class AddNew extends Component {
 	}
 	handleChange = name => event => {
 		this.setState({
-		  [name]: event.target.value,
+			[name]: event.target.value,
 		});
-	 };
+	};
 	getAlert() {
-		if(this.state.alertText === 'Success') {
+		if (this.state.alertText === 'Success') {
 			return (
 				<Alert color="success">
-        			Blurb was successfully added! <Link to='/'>Click here</Link> to see it.
+					Blurb was successfully added! <Link to='/'>Click here</Link> to see it.
       		</Alert>
 			)
-		} else if(this.state.alertText === 'Error') {
+		} else if (this.state.alertText === 'Error') {
 			return (
 				<Alert color="danger">
-        			Error: {this.state.error}
-      		</Alert>
+					Error: {this.state.error}
+				</Alert>
 			)
 		} else {
 			return '';
@@ -110,7 +110,7 @@ class AddNew extends Component {
 				<div className="headings"><h3>Add Entry</h3></div>
 				{this.getAlert()}
 
-					<div className="entry-content">
+				<div className="entry-content">
 					<form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
 						<FormControl required className={classes.formControl}>
 							<InputLabel>Category</InputLabel>
@@ -120,24 +120,22 @@ class AddNew extends Component {
 								name="category"
 								className={classes.selectEmpty}
 							>
-							<MenuItem value={'Film'}>Movies</MenuItem>
-							<MenuItem value={'Television'}>TV</MenuItem>
-							<MenuItem value={'Books'}>Books</MenuItem>
-							<MenuItem value={'Music'}>Music</MenuItem>
-							<MenuItem value={'Other'}>Other</MenuItem>
+								<MenuItem value={'Film'}>Movies</MenuItem>
+								<MenuItem value={'Television'}>TV</MenuItem>
+								<MenuItem value={'Books'}>Books</MenuItem>
+								<MenuItem value={'Music'}>Music</MenuItem>
+								<MenuItem value={'Other'}>Other</MenuItem>
 							</Select>
 						</FormControl>
-						<div>
-							<TextField
-								required
-								label="Title"
-								placeholder="Title"
-								className="tf-title"
-								value={this.state.name}
-								onChange={this.handleChange('name')}
-							/>
-						</div>
-						<div>
+						<br/>
+						<TextField
+							required
+							label="Title"
+							placeholder="Title"
+							className="tf-title"
+							value={this.state.name}
+							onChange={this.handleChange('name')}
+						/>
 						<TextField
 							required
 							label="Blurb"
@@ -149,12 +147,11 @@ class AddNew extends Component {
 							value={this.state.content}
 							onChange={this.handleChange('content')}
 						/>
-						</div>
-						<div className=" button-div">
+						<div className="button-div">
 							<button className="btn btn-outline-secondary waves-effect">Submit</button>
 						</div>
-						</form>
-					</div>
+					</form>
+				</div>
 			</Container>
 		);
 	}
@@ -169,11 +166,11 @@ function mapStateToProps(state) {
 }
 AddNew.propTypes = {
 	classes: PropTypes.object.isRequired,
- };
- 
+};
+
 export default compose(
 	withStyles(styles, {
-	  name: 'styles',
+		name: 'styles',
 	}),
 	connect(mapStateToProps),
- )(AddNew);
+)(AddNew);

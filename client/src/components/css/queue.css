@@ -6,6 +6,11 @@
    border-radius: .25rem;
    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)
 }
+.add-queue-content {
+  max-width: 500px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
 .row-queue {
    display: flex;
    -ms-flex-wrap: wrap;
