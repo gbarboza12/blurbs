@@ -200,7 +200,6 @@ class Queue extends Component {
                 className={classNames(classes.margin, classes.textField)}
                 value={this.state.item}
                 onChange={this.handleTFChange('item')}
-                margin=""
               />
               <TextField
                 select
@@ -215,7 +214,9 @@ class Queue extends Component {
                 <MenuItem value={'Music'}>Music</MenuItem>
                 <MenuItem value={'Other'}>Other</MenuItem>
               </TextField> 
+              <div className="col-5 text-right">
               <Button className={classes.buttonAdd} onClick={this.handleSubmit}>Add</Button>
+              </div>
             </form>
           </div>
           : null

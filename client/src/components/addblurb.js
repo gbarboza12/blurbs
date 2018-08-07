@@ -16,7 +16,6 @@ import { authHeader } from '../helpers/authheader';
 // import * as FontAwesome from 'react-fontawesome';
 
 const styles = theme => ({
-
 	formControl: {
 	  margin: theme.spacing.unit,
 	  minWidth: 120,

@@ -39,7 +39,7 @@ class Events extends Component {
     }
 
     render() {
-        if (this.props.data.length == 0) {
+        if (this.props.data.length === 0) {
             return (
                 <VerticalTimelineElement
                     className="vertical-timeline-element"
