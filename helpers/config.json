@@ -1,0 +1,4 @@
+{
+    "connectionString" : "mongodb://admin:password1@ds139921.mlab.com:39921/blurbs",
+    "secret": "1231cb"
+}

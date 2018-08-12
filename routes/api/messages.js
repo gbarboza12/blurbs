@@ -1,4 +1,4 @@
-import Blurb from '../../models/blurbs';
+import Blurb from '../../models/Blurb';
 import { Router } from 'express';
 
 const router = module.exports = new Router();
