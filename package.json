@@ -4,7 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "start": "node server.js --exec babel-node --presets es2015,stage-0",
+        "start": "node start.js",
         "start:server": "nodemon server.js --exec babel-node --presets es2015,stage-0",
         "start:client": "cd client && yarn start",
         "start:dev": "concurrently --kill-others-on-fail \"yarn start:server\" \"yarn start:client\"",
