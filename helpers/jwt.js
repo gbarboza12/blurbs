@@ -1,3 +1,4 @@
+"use strict";
 const expressJwt = require('express-jwt');
 const userService = require('../services/userservice');
 const secret = process.env.SECRET || "bryan"
