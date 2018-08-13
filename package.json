@@ -2,7 +2,8 @@
     "scripts": {
         "start:server": "nodemon server.js --exec babel-node --presets es2015,stage-0",
         "start:client": "cd client && yarn start",
-        "start:dev": "concurrently --kill-others-on-fail \"yarn start:server\" \"yarn start:client\""
+        "start:dev": "concurrently --kill-others-on-fail \"yarn start:server\" \"yarn start:client\"",
+        "heroku-postbuild": "cd client && yarn && yarn run build"
     },
     "dependencies": {
         "babel-cli": "^6.26.0",
