@@ -1,4 +1,3 @@
-const config = require('config.json');
 const mongoose = require('mongoose');
 var url = process.env.MONGOLAB_URI;
 
