@@ -1,37 +1,23 @@
 
  .ta  {
-   margin: 10px 8px !important;
+   margin: 8px !important;
    padding-right: 15px !important;
  }
  .tf-title {
   margin: 15px 8px !important;
   width: 200px;
  }
- .form-control:focus {
-   border-color: none;
-   box-shadow: none;
-   background-color: transparent;
- }
  .form-group {
    position: relative;
    padding-top: 1.5rem;
  }
- .md-form input[type="text"], .md-form input[type="password"], .md-form input[type="email"] {
-   border-bottom: 1px solid #997e94;
- }
- .md-form label {
-   top: 2.0rem;
-   font-size: 18px;
-   color: #7f697c;
- }
- .md-form label.active{
-   font-size: 14px;
- }
  .button-div {
-  text-align: right !important;
+   text-align: right !important;
    padding-top: 20px;
  }
-
+ .login-button-div {
+   padding-top: 15px;
+ }
  @media (max-width: 768px) {
    .btn{
        margin-bottom: 5px;

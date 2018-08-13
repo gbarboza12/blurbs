@@ -1,11 +1,11 @@
-import Queue from '../../models/queue';
+import Queue from '../../models/Queue';
 import { Router } from 'express';
 
 const router = module.exports = new Router();
 
 // get specified users queue entries
 router.get('/api/queue/:id', (req, res) => {
-     Queue.find({'author.id': req.user._id}, (err, queue) => {
+     Queue.find({author: req.params.id}, (err, queue) => {
       if (err) return res.json({ success: false, error: err });
       return res.json({ success: true, data: queue });
   });

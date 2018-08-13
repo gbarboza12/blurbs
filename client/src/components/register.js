@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input } from 'mdbreact';
+import TextField from '@material-ui/core/TextField';
+import compose from 'recompose/compose';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
 
 import { userActions } from '../actions/useractions';
+
+const styles = theme => ({
+	container: {
+	  flexWrap: 'wrap',
+	  textAlign: 'center'
+	},
+	textField: {
+	  marginLeft: theme.spacing.unit,
+	  marginRight: theme.spacing.unit,
+	  marginBottom: 10,
+	  minWidth: 120,
+	  width: 200,
+	},
+ });
 
 class Register extends Component {
 	constructor(props) {
@@ -16,20 +34,19 @@ class Register extends Component {
 			submitted: false,
 		};
 
-		this.handleChange = this.handleChange.bind(this);
+		this.handleTFChange = this.handleTFChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleChange(event) {
-		const { name, value } = event.target;
+	handleTFChange = name => event => {
 		const { user } = this.state;
 		this.setState({
 			user: {
 				...user,
-				[name]: value
+				  [name]: event.target.value,
 			}
 		});
-	}
+	 };
 	handleSubmit(event) {
 		event.preventDefault();
 		this.setState({ submitted: true });
@@ -40,39 +57,36 @@ class Register extends Component {
 		}
 	}
 	render() {
-		const { registering } = this.props;
+		const { registering, classes } = this.props;
 		const { user, submitted } = this.state;
 		return (
 			<div>
 				<div className="text-center">
 					<h3>Register</h3>
-					<hr className="hr-light" />
 				</div>
-				<form onSubmit={this.handleSubmit}>
-					<Input
+				<form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+					<TextField
 						label="Email"
-						group
 						type="email"
-						name="email"
+						className={classes.textField}
 						value={user.email ? user.email : ''}
-						onChange={this.handleChange}>
-					</Input>
+						onChange={this.handleTFChange('email')}
+					/>
 					{submitted && !user.email &&
 						<div className="help-block">Email is required</div>
 					}
-					<Input
+					<TextField
 						label="Password"
-						group
 						type="password"
-						name="password"
+						className={classes.textField}
 						value={user.password}
-						onChange={this.handleChange}>
-					</Input>
+						onChange={this.handleTFChange('password')}
+					/>
 					{submitted && !user.password &&
 						<div className="help-block">Password is required</div>
 					}
-					<div className="text-center">
-					<button className="btn btn-outline-secondary waves-effect">Register</button>
+					<div className="login-button-div">
+						<button className="btn btn-outline-secondary waves-effect">Register</button>
 						<br />
 						{registering}
 					</div>
@@ -88,5 +102,12 @@ function mapStateToProps(state) {
 		registering
 	};
 }
-
-export default connect(mapStateToProps)(Register);
+Register.propTypes = {
+	classes: PropTypes.object.isRequired,
+ };
+ export default compose(
+	withStyles(styles, {
+	  name: 'styles',
+	}),
+	connect(mapStateToProps),
+ )(Register);

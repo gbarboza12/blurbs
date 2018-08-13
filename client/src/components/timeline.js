@@ -43,6 +43,9 @@ class Timeline extends Component {
     render() {
         return (
             <Container>
+                <div className="headings">
+                    <h3>Timeline</h3>
+                </div>
                 <Row>
                     <VerticalTimeline animate={false} >
                         <Events data={this.state.data} />

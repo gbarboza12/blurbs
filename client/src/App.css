@@ -18,6 +18,7 @@ body {
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   color: #000;
   opacity: .6;
+  padding-bottom: 5px;
 }
 .App-header {
   background-color: transparent;
@@ -52,16 +53,19 @@ body {
 	border-top: 0;
 	border-right: 0;
 }
-@media (max-width: 768px){
+@media (max-width: 400px){
   .navigation__link  {
-    font-size: 14px;
+    font-size: 13px;
     margin: 0;
-    padding: 0 15px;
+    padding: 0 13px;
   }
 }
 .headings {
   padding-left: 5px;
   padding-top: 12px;
+}
+.container {
+  max-width: 960px;
 }
 .content {
   padding: 30px;
