@@ -1,5 +1,10 @@
 {
+    "name": "blurbs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
     "scripts": {
+        "start": "node start.js",
         "start:server": "nodemon server.js --exec babel-node --presets es2015,stage-0",
         "start:client": "cd client && yarn start",
         "start:dev": "concurrently --kill-others-on-fail \"yarn start:server\" \"yarn start:client\"",
@@ -20,5 +25,9 @@
         "morgan": "^1.9.0",
         "nodemon": "^1.18.2",
         "rootpath": "^0.1.2"
+    },
+    "devDependencies": {
+        "babel-polyfill": "^6.26.0",
+        "babel-register": "^6.26.0"
     }
 }

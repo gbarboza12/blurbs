@@ -1,5 +1,4 @@
 import React from 'react';
-import 'mdbreact/dist/css/mdb.css';
 import './App.css';
 import './components/css/queue.css';
 import './components/css/forms.css';
