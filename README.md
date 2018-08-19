@@ -4,7 +4,7 @@ books you've read, or any other kind of media that you've recently consumed. The
 of media that you want to consume next. 
 
 # Installation
-> git clone https://github.com/gbarboza12/blurbs.git
+> git clone https://github.com/gbarboza12/blurbs.git <br />
 > npm install or yarn add
 
 # Run
