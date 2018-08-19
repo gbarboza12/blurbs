@@ -1,6 +1,6 @@
-import User from '../../models/User';
-import UserSession from '../../models/UserSession';
-import { Router } from 'express';
+const User = require('../../models/User');
+const UserSession = require('../../models/UserSession');
+const Router = require('express');
 
 const router = module.exports = new Router();
 

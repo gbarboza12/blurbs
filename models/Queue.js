@@ -1,12 +1,11 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-const QueueSchema = new Schema({
+const QueueSchema = new mongoose.Schema({
    item: String,
    category: {type: String, default: null},
    completed: Boolean,
    date: { type: Date, default: Date.now },
    author: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
  });
-
- export default mongoose.model('Queue', QueueSchema);
+ 
+ module.exports = mongoose.model('Queue', QueueSchema);

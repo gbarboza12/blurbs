@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-const BlurbsSchema = new Schema({
+const BlurbsSchema = new mongoose.Schema({
   category: String,
   name: String,
   content: String,
@@ -12,4 +11,4 @@ const BlurbsSchema = new Schema({
   }
 });
 
-  export default mongoose.model('Blurb', BlurbsSchema);
+module.exports = mongoose.model('Blurb', BlurbsSchema);

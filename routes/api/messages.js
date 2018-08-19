@@ -1,5 +1,5 @@
-import Blurb from '../../models/Blurb';
-import { Router } from 'express';
+const Blurb = require('../../models/Blurb');
+const Router = require('express');
 
 const router = module.exports = new Router();
 

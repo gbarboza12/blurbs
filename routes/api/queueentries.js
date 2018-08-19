@@ -1,5 +1,5 @@
-import Queue from '../../models/Queue';
-import { Router } from 'express';
+const Queue = require('../../models/Queue');
+const Router = require('express');
 
 const router = module.exports = new Router();
 
