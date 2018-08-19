@@ -10,7 +10,7 @@ const path = require("path")
 
 const app = express();
 
-const API_PORT = process.env.API_PORT || 3001;
+const API_PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, "client", "build")))
 
