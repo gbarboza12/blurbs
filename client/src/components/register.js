@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import compose from 'recompose/compose';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
+import classNames from 'classnames';
 
 import { userActions } from '../actions/useractions';
 
@@ -12,6 +13,15 @@ const styles = theme => ({
 	container: {
 	  flexWrap: 'wrap',
 	  textAlign: 'center'
+	},
+	margin: {
+		margin: theme.spacing.unit,
+	 },
+	 cssRoot: {
+		backgroundColor: '#AA00FF',
+		'&:hover': {
+		  backgroundColor: '#673AB7',
+		},
 	},
 	textField: {
 	  marginLeft: theme.spacing.unit,
@@ -86,7 +96,14 @@ class Register extends Component {
 						<div className="help-block">Password is required</div>
 					}
 					<div className="login-button-div">
-						<button className="btn btn-outline-secondary waves-effect">Register</button>
+						<Button
+							variant="contained"
+							color="primary"
+							className={classNames(classes.margin, classes.cssRoot)}
+							onClick={this.handleSubmit}
+						>
+							Register
+						</Button>
 						<br />
 						{registering}
 					</div>
