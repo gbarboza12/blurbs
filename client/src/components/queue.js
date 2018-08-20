@@ -30,11 +30,13 @@ class Queue extends Component {
       items: [],
       error: null,
       addNew: false,
+      sorted: null,
     };
     this.pollInterval = null;
 
     this.deleteItem = this.deleteItem.bind(this);
     this.completeItem = this.completeItem.bind(this);
+    this.sortCategory = this.sortCategory.bind(this);
     this.addItem = this.addItem.bind(this);
     this.errorMessage = this.errorMessage.bind(this);
   }
@@ -42,24 +44,36 @@ class Queue extends Component {
   componentDidMount() {
     this.loadQueueEntriesFromServer();
     if (!this.pollInterval) {
-      this.pollInterval = setInterval(this.loadQueueEntriesFromServer, 2000);
+      this.pollInterval = setInterval(this.loadQueueEntriesFromServer, 1000);
     }
   }
   componentWillUnmount() {
     if (this.pollInterval) clearInterval(this.pollInterval);
-    this.pollInterval = null;
+    this.setState({pollInterval: null});
   }
   loadQueueEntriesFromServer = () => {
     const { user } = this.props;
+    const {sorted} = this.state;
 
-    fetch(`/api/queue/${user._id}`, {
-      method: 'GET',
-      headers: { 'Authorization': authHeader() }
-    }).then(data => data.json())
-      .then((res) => {
-        if (!res.success) { this.setState({ error: res.error }); console.log(this.state.error) }
-        else { this.setState({ items: res.data }); }
-      });
+    if (sorted) {
+      fetch(`/api/queue/${user._id}/${sorted}`, {
+        method: 'GET',
+        headers: { 'Authorization': authHeader() }
+      }).then(data => data.json())
+        .then((res) => {
+          if (!res.success) { this.setState({ error: res.error }); console.log(this.state.error) }
+          else { this.setState({ items: res.data }); }
+        });
+    } else {
+      fetch(`/api/queue/${user._id}`, {
+        method: 'GET',
+        headers: { 'Authorization': authHeader() }
+      }).then(data => data.json())
+        .then((res) => {
+          if (!res.success) { this.setState({ error: res.error }); console.log(this.state.error) }
+          else { this.setState({ items: res.data }); }
+        });
+    }
   }
   deleteItem(queueId) {
     var filteredItems = this.state.items.filter(function (item) {
@@ -82,7 +96,6 @@ class Queue extends Component {
     });
   }
   completeItem(queueId, current) {
-    console.log(current)
     const completed = !current;
     const { user } = this.props;
     fetch(`/api/queue/${user._id}/${queueId}`, {
@@ -106,6 +119,10 @@ class Queue extends Component {
         )
       });
     });
+  }
+  sortCategory(category) {
+    this.setState({sorted: category});
+    this.loadQueueEntriesFromServer();
   }
   addItem() {
     this.setState({ addNew: !this.state.addNew })
@@ -139,7 +156,11 @@ class Queue extends Component {
           <AddQueue addItem={this.addItem} errorMessage={this.errorMessage}/>
           : null
         }
-        <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem} />
+        {this.state.sorted ?
+          <a href="#" onClick={() => this.sortCategory(null)}>Show All</a>
+        : null}
+
+        <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem} sort={this.sortCategory} />
       </Container>
     )
   }

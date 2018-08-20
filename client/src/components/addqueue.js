@@ -95,18 +95,15 @@ class AddQueue extends Component {
          [name]: event.target.value,
       });
    };
-
    add() {
       this.props.addItem();
    }
-
    errorMessage(msg) {
       this.props.errorMessage(msg);
    }
 
    render() {
       const { classes } = this.props;
-
       return (
          <div className="queue-content add-queue-content">
             <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>

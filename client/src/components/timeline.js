@@ -26,7 +26,7 @@ class Timeline extends Component {
     }
     componentWillUnmount() {
         if (this.pollInterval) clearInterval(this.pollInterval);
-        this.pollInterval = null;
+        this.setState({pollInterval: null});
     }
     loadBlurbsFromServer = () => {
         const { user } = this.props;
