@@ -1,40 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
 import { Alert, Container } from 'reactstrap';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import compose from 'recompose/compose';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import { authHeader } from '../helpers/authheader';
 import QueueItems from './queueitems';
+import AddQueue from './addqueue';
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing.unit,
-    marginRight: 13,
-    marginLeft: 20,
-  },
-  textField: {
-    marginRight: theme.spacing.unit,
-    width: 200,
-    flexBasis: 200,
-  },
-  tfSelect: {
-    width: 100,
-  },
-  buttonAdd: {
-    color: '#673AB7 !important',
-    marginBottom: '10px',
-    marginTop: '10px',
-  },
   button: {
     marginRight: '-5px',
     marginBottom: '-17px',
@@ -57,11 +33,10 @@ class Queue extends Component {
     };
     this.pollInterval = null;
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTFChange = this.handleTFChange.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.completeItem = this.completeItem.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.errorMessage = this.errorMessage.bind(this);
   }
 
   componentDidMount() {
@@ -86,45 +61,6 @@ class Queue extends Component {
         else { this.setState({ items: res.data }); }
       });
   }
-  handleSubmit(e) {
-    e.preventDefault();
-    const item = this.state.item;
-    const category = this.state.category;
-    const completed = false;
-    const date = new Date().toISOString();
-    const { user } = this.props;
-
-    if (!item) {
-      this.setState({
-        error: 'Please fill in all of the fields.'
-      })
-      return;
-    }
-    fetch('/api/queue', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': authHeader()
-      }),
-      body: JSON.stringify({ item, category, completed, date, user }),
-    }).then(res => res.json()).then((res) => {
-      if (!res.success) {
-        this.setState({ error: res.error.message || res.error, alertText: 'Error' });
-        console.log(this.state.error)
-      }
-      else this.setState({
-        item: '',
-        category: '',
-        error: null,
-        addNew: false
-      });
-    });
-  }
-  handleTFChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
   deleteItem(queueId) {
     var filteredItems = this.state.items.filter(function (item) {
       return (item.key !== queueId);
@@ -172,7 +108,10 @@ class Queue extends Component {
     });
   }
   addItem() {
-    this.setState({ addNew: true })
+    this.setState({ addNew: !this.state.addNew })
+  }
+  errorMessage(msg) {
+    this.setState({error: msg});
   }
 
   render() {
@@ -197,34 +136,7 @@ class Queue extends Component {
         }
 
         {this.state.addNew ?
-          <div className="queue-content add-queue-content">
-            <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-              <TextField
-                label="Entry"
-                className={classNames(classes.margin, classes.textField)}
-                value={this.state.item}
-                onChange={this.handleTFChange('item')}
-              />
-              <TextField
-                select
-                label="Category"
-                className={classNames(classes.margin, classes.tfSelect)}
-                value={this.state.category}
-                onChange={this.handleTFChange('category')}
-              >
-                <MenuItem value={'Film'}>Movies</MenuItem>
-                <MenuItem value={'Television'}>TV</MenuItem>
-                <MenuItem value={'Books'}>Books</MenuItem>
-                <MenuItem value={'Music'}>Music</MenuItem>
-                <MenuItem value={'Other'}>Other</MenuItem>
-              </TextField> 
-             
-             <div style={{margin: 'auto'}}>
-                <Button variant="contained" className={classes.buttonAdd} onClick={this.handleSubmit}>Add</Button>
-                </div>
-              
-            </form>
-          </div>
+          <AddQueue addItem={this.addItem} errorMessage={this.errorMessage}/>
           : null
         }
         <QueueItems entries={this.state.items} delete={this.deleteItem} complete={this.completeItem} />

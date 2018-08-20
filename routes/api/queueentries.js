@@ -11,6 +11,14 @@ router.get('/api/queue/:id', (req, res) => {
   });
 });
 
+// get specified users queue entries by category
+router.get('/api/queue/:id/category', (req, res) => {
+  Queue.find({author: req.params.id, category: req.params.category}, (err, queue) => {
+   if (err) return res.json({ success: false, error: err });
+   return res.json({ success: true, data: queue });
+});
+});
+
 // post a new entry to queue
 router.post('/api/queue', (req, res) => {
    const { item, category, completed, date, user } = req.body;
