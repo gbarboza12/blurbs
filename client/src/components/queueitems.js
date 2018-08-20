@@ -38,6 +38,9 @@ class QueueItems extends Component {
   complete(id, current) {
     this.props.complete(id, current);
   }
+  sortCategory(category) {
+    this.props.sort(category);
+  }
   getIcon(category) {
     if (category === 'Film') {
       return <FontAwesome name="film" style={{ color: this.getIconColor(category) }} />;
@@ -83,8 +86,10 @@ class QueueItems extends Component {
           </label>
           {item.category ?
             <div className="queue-category">
-              {this.getIcon(item.category)}{'  '}
-              {item.category}
+              <a href="#" onClick={() => this.sortCategory(item.category)}>
+                {this.getIcon(item.category)}{'  '}
+                {item.category}
+              </a>
             </div>
             : <br />}
         </div>

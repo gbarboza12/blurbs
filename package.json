@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "start": "node server.js",
-        "start:server": "nodemon server.js --exec babel-node --presets es2015,stage-0",
+        "start:server": "nodemon server.js",
         "start:client": "cd client && yarn start",
         "start:dev": "concurrently --kill-others-on-fail \"yarn start:server\" \"yarn start:client\"",
         "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
