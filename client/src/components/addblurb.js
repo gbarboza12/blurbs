@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Alert, Container } from 'reactstrap';
 import compose from 'recompose/compose';
-
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -11,9 +10,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import classNames from 'classnames';
 
 import { authHeader } from '../helpers/authheader';
-// import * as FontAwesome from 'react-fontawesome';
 
 const styles = theme => ({
 	formControl: {
@@ -23,6 +23,16 @@ const styles = theme => ({
 	},
 	selectEmpty: {
 		marginTop: theme.spacing.unit * 2,
+	},
+	margin: {
+		margin: theme.spacing.unit,
+	},
+	cssSubmit: {
+		backgroundColor: '#AA00FF',
+		'&:hover': {
+		  backgroundColor: '#673AB7',
+		},
+		fontWeight: 'bold',
 	},
 });
 
@@ -148,7 +158,15 @@ class AddNew extends Component {
 							onChange={this.handleChange('content')}
 						/>
 						<div className="button-div">
-							<button className="btn btn-outline-secondary waves-effect">Submit</button>
+							<Button
+								variant="contained"
+								type="submit"
+								color="primary"
+								disabled={this.state.disabled}
+								className={classNames(classes.margin, classes.cssSubmit)}
+							>
+								Submit
+							</Button>
 						</div>
 					</form>
 				</div>

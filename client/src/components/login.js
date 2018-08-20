@@ -97,9 +97,9 @@ class Login extends React.Component {
 					<div className="login-button-div">
 						<Button
 							variant="contained"
+							type="submit"
 							color="primary"
 							className={classNames(classes.margin, classes.cssRoot)}
-							onClick={this.handleSubmit}
 						>
 						Login
 						</Button>

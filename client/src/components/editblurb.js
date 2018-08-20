@@ -10,11 +10,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import classNames from 'classnames';
 
 import { authHeader } from '../helpers/authheader';
 
 const styles = theme => ({
-
 	formControl: {
 		margin: theme.spacing.unit,
 		minWidth: 120,
@@ -22,6 +23,21 @@ const styles = theme => ({
 	},
 	selectEmpty: {
 		marginTop: theme.spacing.unit * 2,
+	},
+	margin: {
+		margin: theme.spacing.unit,
+	},
+	cssUpdate: {
+		backgroundColor: '#AA00FF',
+		'&:hover': {
+		  backgroundColor: '#673AB7',
+		},
+	},
+	cssDelete: {
+		backgroundColor: '#E91E63',
+		'&:hover': {
+		  backgroundColor: '#AD1457',
+		},
 	},
 });
 
@@ -199,8 +215,26 @@ class EditBlurb extends Component {
 							/>
 						</div>
 						<div className='button-div'>
-							<button className="btn btn-outline-secondary waves-effect" disabled={this.state.disabled} onClick={this.handleUpdate}>Update Post</button>{'  '}
-							<button className="btn btn-outline-danger waves-effect" disabled={this.state.disabled} onClick={this.handleDelete}>Delete Post</button>
+							<Button
+								variant="contained"
+								type="submit"
+								color="primary"
+								disabled={this.state.disabled}
+								className={classNames(classes.margin, classes.cssUpdate)}
+								onClick={this.handleUpdate}
+							>
+								Update Post
+							</Button>
+							<Button
+								variant="contained"
+								type="submit"
+								color="primary"
+								disabled={this.state.disabled}
+								className={classNames(classes.margin, classes.cssDelete)}
+								onClick={this.handleDelete}
+							>
+								Delete Post
+							</Button>
 						</div>
 					</form>
 				</div>
