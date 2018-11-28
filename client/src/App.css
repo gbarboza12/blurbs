@@ -16,9 +16,15 @@ body {
   display: block !important;
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Slab', serif;
   color: #000;
   opacity: .6;
   padding-bottom: 5px;
+}
+.headings h3 {
+  font-family: 'Roboto Slab', serif;
+  color: #fff;
+  opacity: inherit;
 }
 .App-header {
   background-color: transparent;

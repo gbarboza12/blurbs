@@ -30,4 +30,5 @@
  }
  .vertical-timeline-element-content .vertical-timeline-element-date {
    top: 10px !important;
+   font-weight: bold !important;
  }

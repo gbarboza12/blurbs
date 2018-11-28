@@ -87,7 +87,7 @@ class Events extends Component {
             <h3 className="vertical-timeline-element-title">
               {event.category}
             </h3>
-            <h4 className="vertical-timeline-element-subtitle">{event.name}</h4>
+            <h2 className="vertical-timeline-element-subtitle">{event.name}</h2>
             <ShowMoreText
               lines={10}
               more="Show more"
