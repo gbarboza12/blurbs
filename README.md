@@ -5,7 +5,10 @@ of media that you want to consume next.
 
 # Installation
 > git clone https://github.com/gbarboza12/blurbs.git <br />
-> npm install or yarn add
+> cd blurbs
+> yarn add
+> cd client
+> yarn add
 
 # Run
-> npm start:dev or yarn start:dev
+> yarn start:dev
