@@ -3,7 +3,7 @@ const Router = require('express');
 
 const router = module.exports = new Router();
 
-// gets all blurbs
+// gets all blurbs from all users
 router.get('/api/blurbs', (req, res) => {
     Blurb.find((err, blurbs) => {
         if (err) return res.json({ success: false, error: err });
@@ -11,9 +11,9 @@ router.get('/api/blurbs', (req, res) => {
     });
 });
 
-// gets the specified user's blurbs
+// gets the specified user's blurbs sorted by created date
 router.get('/api/blurbs/:id', (req, res) => {
-  Blurb.find({author: req.params.id}).sort('-date').exec((err, blurbs) => {
+  Blurb.find({author: req.params.id}).sort({ _id : -1 }).exec((err, blurbs) => {
     if (err) return res.json({ success: false, error: err });
       return res.json({ success: true, data: blurbs });
   });
