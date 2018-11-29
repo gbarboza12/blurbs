@@ -44,7 +44,7 @@ class Timeline extends Component {
         return (
             <Container>
                 <div className="headings">
-                    <h3>Timeline</h3>
+                    <h2>Timeline</h2>
                 </div>
                 <Row>
                     <VerticalTimeline animate={false} >

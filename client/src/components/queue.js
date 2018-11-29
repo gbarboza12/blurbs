@@ -136,7 +136,7 @@ class Queue extends Component {
     return (
       <Container>
         <div className="headings">
-          <h3>Queue</h3>
+          <h2>Queue</h2>
         </div>
 
         {this.state.error ?

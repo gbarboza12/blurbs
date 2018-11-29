@@ -20,7 +20,7 @@ class Events extends Component {
           <FontAwesome name="tv fa-2x" />
         </div>
       );
-    } else if (category === "Book") {
+    } else if (category === "Books") {
       return (
         <div className="timeline-icon">
           <FontAwesome name="book fa-2x" />
@@ -84,10 +84,10 @@ class Events extends Component {
             icon={this.getIcon(event.category)}
             key={event._id}
           >
-            <h3 className="vertical-timeline-element-title">
-              {event.category}
-            </h3>
-            <h2 className="vertical-timeline-element-subtitle">{event.name}</h2>
+            <h4 className="vertical-timeline-element-title">
+              {event.name}
+            </h4>
+            <h6 className="vertical-timeline-element-subtitle">{event.category}</h6>
             <ShowMoreText
               lines={10}
               more="Show more"
@@ -97,7 +97,6 @@ class Events extends Component {
             >
               {event.content}
             </ShowMoreText>
-            {/* <p>{event.content}</p> */}
             <p>
               <Link
                 to={{

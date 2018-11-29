@@ -21,7 +21,7 @@ body {
   opacity: .6;
   padding-bottom: 5px;
 }
-.headings h3 {
+.headings h2 {
   font-family: 'Roboto Slab', serif;
   color: #fff;
   opacity: inherit;
@@ -67,8 +67,7 @@ body {
   }
 }
 .headings {
-  padding-left: 5px;
-  padding-top: 12px;
+  margin-top: 30px;
 }
 .container {
   max-width: 960px;
@@ -88,11 +87,12 @@ body {
 }
 .entry-content {
   margin-left: auto;
-   margin-right: auto;
-   padding: 10px 15px;
-   background: rgb(250, 246, 246);
-   border-radius: .25rem;
-   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-   height: 100%;
+  margin-right: auto;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: rgb(250, 246, 246);
+  border-radius: .25rem;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  height: 100%;
 }
 
