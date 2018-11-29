@@ -18,7 +18,13 @@ router.get('/api/blurbs/:id', (req, res) => {
       return res.json({ success: true, data: blurbs });
   });
 });
-
+// gets the specified user's blurbs filtered by category, sorted by created date
+router.get('/api/blurbs/:id/:category', (req, res) => {
+  Blurb.find({author: req.params.id, category: req.params.category}).sort({ _id : -1 }).exec((err, blurbs) => {
+    if (err) return res.json({ success: false, error: err });
+      return res.json({ success: true, data: blurbs });
+  });
+});
 // post a new blurb
 router.post('/api/blurbs', (req, res) => {
     const { category, name, content, date, user } = req.body;
