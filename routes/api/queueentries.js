@@ -22,6 +22,28 @@ router.get("/api/queue/:id/:category", (req, res) => {
   );
 });
 
+// post a new entry to queue
+router.post('/api/queue', (req, res) => {
+  const { item, category, completed, date, user } = req.body;
+
+  if (!item || !date || !user) {
+    return res.json({
+      success: false,
+      error: 'You must provide an item'
+    });
+  }
+  const queue = new Queue();
+  queue.item = item;
+  queue.category = category;
+  queue.completed = completed;
+  queue.date = date;
+  queue.author = user
+  queue.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
 // updates a queue for a specified user
 router.put("/api/queue/:userId/:queueId", (req, res) => {
   const { userId, queueId } = req.params;

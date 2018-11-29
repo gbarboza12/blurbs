@@ -31,6 +31,27 @@ router.get("/api/blurbs/:id/:category", (req, res) => {
     });
 });
 
+// post a new blurb
+router.post('/api/blurbs', (req, res) => {
+  const { category, name, content, date, user } = req.body;
+  if (!category || !name || !content || !date || !user) {
+    return res.json({
+      success: false,
+      error: 'You must provide a category, name, and date'
+    });
+  }
+  const blurb = new Blurb();
+  blurb.category = category;
+  blurb.name = name;
+  blurb.content = content;
+  blurb.date = date;
+  blurb.author = user
+  blurb.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
 // updates a blurb for a specified user
 router.put("/api/blurbs/:userId/:blurbId", (req, res) => {
   const { userId, blurbId } = req.params;
