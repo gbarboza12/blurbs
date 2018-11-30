@@ -46,8 +46,8 @@ function register(user) {
             .then(
                 user => { 
                     dispatch(success());
-                    history.push('/login');
-                    dispatch(alertActions.success('Registration successful'));
+                    history.push('/');
+                    dispatch(alertActions.success('Registration successful. Please login below.'));
                 },
                 error => {
                     dispatch(failure(error.toString()));

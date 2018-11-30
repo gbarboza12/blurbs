@@ -40,7 +40,7 @@ class Timeline extends Component {
   componentDidMount() {
     this.loadBlurbsFromServer();
     if (!this.pollInterval) {
-      this.pollInterval = setInterval(this.loadBlurbsFromServer, 1000);
+      this.pollInterval = setInterval(this.loadBlurbsFromServer, 60000);
     }
   }
   componentWillUnmount() {
@@ -85,8 +85,8 @@ class Timeline extends Component {
     this.setState({
       [event.target.name]: event.target.value,
       filter: event.target.value
-    });
-    this.loadBlurbsFromServer();
+    }, this.loadBlurbsFromServer);
+    //this.loadBlurbsFromServer();
   };
 
   render() {

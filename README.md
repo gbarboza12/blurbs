@@ -5,10 +5,10 @@ of media that you want to consume next.
 
 # Installation
 > git clone https://github.com/gbarboza12/blurbs.git <br />
-> cd blurbs
-> yarn add
-> cd client
-> yarn add
+> cd blurbs<br />
+> yarn add<br />
+> cd client<br />
+> yarn add<br />
 
 # Run
 > yarn start:dev
