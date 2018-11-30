@@ -115,7 +115,7 @@ class Queue extends Component {
             error: null
           });
       });
-      this.loadQueueEntriesFromServer()
+    this.loadQueueEntriesFromServer();
   }
   completeItem(queueId, current) {
     const completed = !current;
@@ -150,7 +150,7 @@ class Queue extends Component {
   }
   addItem() {
     this.setState({ addNew: !this.state.addNew });
-    this.loadQueueEntriesFromServer()
+    this.loadQueueEntriesFromServer();
   }
   errorMessage(msg) {
     this.setState({ error: msg });
