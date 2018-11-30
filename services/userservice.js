@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const db = require('../helpers/db');
-const User = db.User;
+const User = require('../models/User')
 const secret = process.env.SECRET || "bryan" 
  
 module.exports = {

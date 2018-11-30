@@ -38,7 +38,7 @@ class Queue extends Component {
       items: [],
       error: null,
       addNew: false,
-      sorted: null
+      sorted: ""
     };
     this.pollInterval = null;
 
@@ -52,7 +52,7 @@ class Queue extends Component {
   componentDidMount() {
     this.loadQueueEntriesFromServer();
     if (!this.pollInterval) {
-      this.pollInterval = setInterval(this.loadQueueEntriesFromServer, 1000);
+      this.pollInterval = setInterval(this.loadQueueEntriesFromServer, 60000);
     }
   }
   componentWillUnmount() {
@@ -63,8 +63,8 @@ class Queue extends Component {
     const { user } = this.props;
     const { sorted } = this.state;
 
-    if (sorted) {
-      fetch(`/api/queue/${user._id}/${sorted}`, {
+    if (sorted === "") {
+      fetch(`/api/queue/${user._id}`, {
         method: "GET",
         headers: { Authorization: authHeader() }
       })
@@ -78,7 +78,7 @@ class Queue extends Component {
           }
         });
     } else {
-      fetch(`/api/queue/${user._id}`, {
+      fetch(`/api/queue/${user._id}/${sorted}`, {
         method: "GET",
         headers: { Authorization: authHeader() }
       })
@@ -115,6 +115,7 @@ class Queue extends Component {
             error: null
           });
       });
+      this.loadQueueEntriesFromServer()
   }
   completeItem(queueId, current) {
     const completed = !current;
@@ -145,11 +146,11 @@ class Queue extends Component {
       });
   }
   sortCategory(category) {
-    this.setState({ sorted: category });
-    this.loadQueueEntriesFromServer();
+    this.setState({ sorted: category }, this.loadQueueEntriesFromServer);
   }
   addItem() {
     this.setState({ addNew: !this.state.addNew });
+    this.loadQueueEntriesFromServer()
   }
   errorMessage(msg) {
     this.setState({ error: msg });
@@ -193,7 +194,7 @@ class Queue extends Component {
           <AddQueue addItem={this.addItem} errorMessage={this.errorMessage} />
         ) : null}
         {this.state.sorted ? (
-          <a href="#" onClick={() => this.sortCategory(null)}>
+          <a href="#" onClick={() => this.sortCategory("")}>
             Show All
           </a>
         ) : null}

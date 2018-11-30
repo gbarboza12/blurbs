@@ -4,7 +4,7 @@ import { Provider} from 'react-redux';
 import { Router} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'pretty-checkbox/src/pretty-checkbox.scss'
+
 
  
 import  {store}  from './helpers/store'
