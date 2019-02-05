@@ -10,7 +10,7 @@ const path = require("path")
 const API_PORT = process.env.PORT || 3001;
 const url = process.env.MONGOLAB_URI;
 
-// mongoose setup
+//mongoose setup
 mongoose.connect(url, function (err, db) {
     if (err) {
       console.log('Unable to connect to the mongoDB server. Error:', err);

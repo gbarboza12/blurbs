@@ -53,8 +53,14 @@ class Events extends Component {
       return "#70d6ff";
     }
   }
-  getFormattedDate(date) {
-    var localDate = moment(date).format("dddd, MMMM Do YYYY");
+  getFormattedDate(id) {
+    var timestamp = id.toString().substring(0,8)
+    console.log(id.toString().substring(0,8))
+    var date = new Date( parseInt( timestamp, 16 ) * 1000 )
+    console.log(date)
+
+    var localDate = moment(date).format('MMMM Do YYYY, h:mm:ss a')
+    console.log(localDate)
     return localDate;
   }
 
@@ -75,7 +81,7 @@ class Events extends Component {
         return (
           <VerticalTimelineElement
             className="vertical-timeline-element"
-            date={this.getFormattedDate(event.date)}
+            date={this.getFormattedDate(event._id)}
             iconStyle={{
               background: this.getIconBackground(event.category),
               color: "#fff",
